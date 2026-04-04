@@ -1,239 +1,312 @@
-import * as React from "react"
-import useEmblaCarousel, {
-  type UseEmblaCarouselType,
-} from "embla-carousel-react"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+// Use type-only imports for Framer Motion types
+import type { PanInfo, Transition } from 'framer-motion';
+// Use existing lucide-react icons instead of react-icons to avoid environment issues
+import { FileText, Circle, Layers, Layout, Code } from 'lucide-react';
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import './Carousel.css';
 
-type CarouselApi = UseEmblaCarouselType[1]
-type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
-type CarouselOptions = UseCarouselParameters[0]
-type CarouselPlugin = UseCarouselParameters[1]
-
-type CarouselProps = {
-  opts?: CarouselOptions
-  plugins?: CarouselPlugin
-  orientation?: "horizontal" | "vertical"
-  setApi?: (api: CarouselApi) => void
+interface CarouselItemData {
+  id?: number | string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
 }
 
-type CarouselContextProps = {
-  carouselRef: ReturnType<typeof useEmblaCarousel>[0]
-  api: ReturnType<typeof useEmblaCarousel>[1]
-  scrollPrev: () => void
-  scrollNext: () => void
-  canScrollPrev: boolean
-  canScrollNext: boolean
-} & CarouselProps
-
-const CarouselContext = React.createContext<CarouselContextProps | null>(null)
-
-function useCarousel() {
-  const context = React.useContext(CarouselContext)
-
-  if (!context) {
-    throw new Error("useCarousel must be used within a <Carousel />")
+const DEFAULT_ITEMS: CarouselItemData[] = [
+  {
+    title: 'Text Animations',
+    description: 'Cool text animations for your projects.',
+    id: 1,
+    icon: <FileText className="carousel-icon" />
+  },
+  {
+    title: 'Animations',
+    description: 'Smooth animations for your projects.',
+    id: 2,
+    icon: <Circle className="carousel-icon" />
+  },
+  {
+    title: 'Components',
+    description: 'Reusable components for your projects.',
+    id: 3,
+    icon: <Layers className="carousel-icon" />
+  },
+  {
+    title: 'Backgrounds',
+    description: 'Beautiful backgrounds and patterns for your projects.',
+    id: 4,
+    icon: <Layout className="carousel-icon" />
+  },
+  {
+    title: 'Common UI',
+    description: 'Common UI components are coming soon!',
+    id: 5,
+    icon: <Code className="carousel-icon" />
   }
+];
 
-  return context
+const DRAG_BUFFER = 0;
+const VELOCITY_THRESHOLD = 500;
+const GAP = 16;
+// Custom spring transition for smooth 3D rotation
+const SPRING_TRANSITION: Transition = { 
+  type: 'spring', 
+  stiffness: 300, 
+  damping: 30 
+} as const;
+
+interface CarouselItemProps {
+  item: CarouselItemData;
+  index: number;
+  itemWidth: number;
+  round?: boolean;
+  trackItemOffset: number;
+  x: any; // motion value
+  transition: Transition;
 }
 
-function Carousel({
-  orientation = "horizontal",
-  opts,
-  setApi,
-  plugins,
-  className,
-  children,
-  ...props
-}: React.ComponentProps<"div"> & CarouselProps) {
-  const [carouselRef, api] = useEmblaCarousel(
-    {
-      ...opts,
-      axis: orientation === "horizontal" ? "x" : "y",
-    },
-    plugins
-  )
-  const [canScrollPrev, setCanScrollPrev] = React.useState(false)
-  const [canScrollNext, setCanScrollNext] = React.useState(false)
-
-  const onSelect = React.useCallback((api: CarouselApi) => {
-    if (!api) return
-    setCanScrollPrev(api.canScrollPrev())
-    setCanScrollNext(api.canScrollNext())
-  }, [])
-
-  const scrollPrev = React.useCallback(() => {
-    api?.scrollPrev()
-  }, [api])
-
-  const scrollNext = React.useCallback(() => {
-    api?.scrollNext()
-  }, [api])
-
-  const handleKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault()
-        scrollPrev()
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault()
-        scrollNext()
-      }
-    },
-    [scrollPrev, scrollNext]
-  )
-
-  React.useEffect(() => {
-    if (!api || !setApi) return
-    setApi(api)
-  }, [api, setApi])
-
-  React.useEffect(() => {
-    if (!api) return
-    onSelect(api)
-    api.on("reInit", onSelect)
-    api.on("select", onSelect)
-
-    return () => {
-      api?.off("select", onSelect)
-    }
-  }, [api, onSelect])
+function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, transition }: CarouselItemProps) {
+  const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset];
+  const outputRange = [90, 0, -90];
+  const rotateY = useTransform(x, range, outputRange, { clamp: false });
 
   return (
-    <CarouselContext.Provider
-      value={{
-        carouselRef,
-        api: api,
-        opts,
-        orientation:
-          orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
-        scrollPrev,
-        scrollNext,
-        canScrollPrev,
-        canScrollNext,
+    <motion.div
+      key={`${item?.id ?? index}-${index}`}
+      className={`carousel-item ${round ? 'round' : ''}`}
+      style={{
+        width: itemWidth,
+        height: round ? itemWidth : '100%',
+        rotateY: rotateY,
+        ...(round && { borderRadius: '50%' })
+      }}
+      transition={transition}
+    >
+      <div className={`carousel-item-header ${round ? 'round' : ''}`}>
+        <span className="carousel-icon-container">{item.icon}</span>
+      </div>
+      <div className="carousel-item-content">
+        <div className="carousel-item-title">{item.title}</div>
+        <p className="carousel-item-description">{item.description}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+interface CarouselProps {
+  items?: CarouselItemData[];
+  baseWidth?: number;
+  autoplay?: boolean;
+  autoplayDelay?: number;
+  pauseOnHover?: boolean;
+  loop?: boolean;
+  round?: boolean;
+}
+
+export default function Carousel({
+  items = DEFAULT_ITEMS,
+  baseWidth = 350,
+  autoplay = false,
+  autoplayDelay = 3000,
+  pauseOnHover = false,
+  loop = false,
+  round = false
+}: CarouselProps) {
+  const containerPadding = 16;
+  const itemWidth = baseWidth - containerPadding * 2;
+  const trackItemOffset = itemWidth + GAP;
+  
+  const itemsForRender = useMemo(() => {
+    if (!loop) return items;
+    if (items.length === 0) return [];
+    return [items[items.length - 1], ...items, items[0]];
+  }, [items, loop]);
+
+  const [position, setPosition] = useState(() => (loop ? 1 : 0));
+  const x = useMotionValue(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isJumping, setIsJumping] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Initial position setup
+    const startingPosition = loop ? 1 : 0;
+    x.set(-startingPosition * trackItemOffset);
+  }, [loop, trackItemOffset, x]);
+
+  useEffect(() => {
+    if (pauseOnHover && containerRef.current) {
+      const container = containerRef.current;
+      const handleMouseEnter = () => setIsHovered(true);
+      const handleMouseLeave = () => setIsHovered(false);
+      container.addEventListener('mouseenter', handleMouseEnter);
+      container.addEventListener('mouseleave', handleMouseLeave);
+      return () => {
+        container.removeEventListener('mouseenter', handleMouseEnter);
+        container.removeEventListener('mouseleave', handleMouseLeave);
+      };
+    }
+  }, [pauseOnHover]);
+
+  useEffect(() => {
+    if (!autoplay || itemsForRender.length <= 1) return undefined;
+    if (pauseOnHover && isHovered) return undefined;
+
+    const timer = setInterval(() => {
+      if (!isAnimating) {
+        setPosition(prev => {
+           const next = prev + 1;
+           if (next >= itemsForRender.length) return loop ? 1 : prev;
+           return next;
+        });
+      }
+    }, autoplayDelay);
+
+    return () => clearInterval(timer);
+  }, [autoplay, autoplayDelay, isHovered, pauseOnHover, itemsForRender.length, isAnimating, loop]);
+
+  const effectiveTransition: Transition = isJumping ? { duration: 0 } : SPRING_TRANSITION;
+
+  const handleAnimationStart = () => {
+    setIsAnimating(true);
+  };
+
+  const handleAnimationComplete = () => {
+    if (!loop || itemsForRender.length <= 1) {
+      setIsAnimating(false);
+      return;
+    }
+    const lastCloneIndex = itemsForRender.length - 1;
+
+    if (position === lastCloneIndex) {
+      setIsJumping(true);
+      const target = 1;
+      setPosition(target);
+      x.set(-target * trackItemOffset);
+      requestAnimationFrame(() => {
+        setIsJumping(false);
+        setIsAnimating(false);
+      });
+      return;
+    }
+
+    if (position === 0) {
+      setIsJumping(true);
+      const target = items.length;
+      setPosition(target);
+      x.set(-target * trackItemOffset);
+      requestAnimationFrame(() => {
+        setIsJumping(false);
+        setIsAnimating(false);
+      });
+      return;
+    }
+
+    setIsAnimating(false);
+  };
+
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
+    const { offset, velocity } = info;
+    const direction =
+      offset.x < -DRAG_BUFFER || velocity.x < -VELOCITY_THRESHOLD
+        ? 1
+        : offset.x > DRAG_BUFFER || velocity.x > VELOCITY_THRESHOLD
+          ? -1
+          : 0;
+
+    if (direction === 0) return;
+
+    setPosition(prev => {
+      const next = prev + direction;
+      const max = itemsForRender.length - 1;
+      return Math.max(0, Math.min(next, max));
+    });
+  };
+
+  const dragProps = loop
+    ? {}
+    : {
+        dragConstraints: {
+          left: -trackItemOffset * Math.max(itemsForRender.length - 1, 0),
+          right: 0
+        }
+      };
+
+  const activeIndex =
+    items.length === 0 ? 0 : loop ? (position - 1 + items.length) % items.length : Math.min(position, items.length - 1);
+
+  // Optimization: For high-volume strategic notes (300+ requested), 
+  // we limit dots to prevent UI overflow.
+  const maxIndicators = 15;
+  const showIndicators = items.length > 0 && items.length <= maxIndicators;
+
+  return (
+    <div
+      ref={containerRef}
+      className={`carousel-container ${round ? 'round' : ''}`}
+      style={{
+        width: `${baseWidth}px`,
+        ...(round && { height: `${baseWidth}px`, borderRadius: '50%' })
       }}
     >
-      <div
-        onKeyDownCapture={handleKeyDown}
-        className={cn("relative", className)}
-        role="region"
-        aria-roledescription="carousel"
-        data-slot="carousel"
-        {...props}
+      <motion.div
+        className="carousel-track"
+        drag={isAnimating ? false : 'x'}
+        {...dragProps}
+        style={{
+          width: itemWidth,
+          gap: `${GAP}px`,
+          perspective: 1000,
+          perspectiveOrigin: `${position * trackItemOffset + itemWidth / 2}px 50%`,
+          x
+        }}
+        onDragEnd={handleDragEnd}
+        animate={{ x: -(position * trackItemOffset) }}
+        transition={effectiveTransition}
+        onAnimationStart={handleAnimationStart}
+        onAnimationComplete={handleAnimationComplete}
       >
-        {children}
-      </div>
-    </CarouselContext.Provider>
-  )
-}
-
-function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
-  const { carouselRef, orientation } = useCarousel()
-
-  return (
-    <div
-      ref={carouselRef}
-      className="overflow-hidden"
-      data-slot="carousel-content"
-    >
-      <div
-        className={cn(
-          "flex",
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
-          className
-        )}
-        {...props}
-      />
+        {itemsForRender.map((item, index) => (
+          <CarouselItem
+            key={`${item?.id ?? index}-${index}`}
+            item={item}
+            index={index}
+            itemWidth={itemWidth}
+            round={round}
+            trackItemOffset={trackItemOffset}
+            x={x}
+            transition={effectiveTransition}
+          />
+        ))}
+      </motion.div>
+      
+      {showIndicators && (
+        <div className={`carousel-indicators-container ${round ? 'round' : ''}`}>
+          <div className="carousel-indicators">
+            {items.map((_, index) => (
+              <motion.div
+                key={index}
+                className={`carousel-indicator ${activeIndex === index ? 'active' : 'inactive'}`}
+                animate={{
+                  scale: activeIndex === index ? 1.2 : 1
+                }}
+                onClick={() => setPosition(loop ? index + 1 : index)}
+                transition={{ duration: 0.15 }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {!showIndicators && items.length > 0 && (
+         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-white/40 tracking-[.3em] font-bold uppercase pointer-events-none">
+            {activeIndex + 1} / {items.length}
+         </div>
+      )}
     </div>
-  )
-}
-
-function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
-  const { orientation } = useCarousel()
-
-  return (
-    <div
-      role="group"
-      aria-roledescription="slide"
-      data-slot="carousel-item"
-      className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full",
-        orientation === "horizontal" ? "pl-4" : "pt-4",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function CarouselPrevious({
-  className,
-  variant = "outline",
-  size = "icon",
-  ...props
-}: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
-
-  return (
-    <Button
-      data-slot="carousel-previous"
-      variant={variant}
-      size={size}
-      className={cn(
-        "absolute size-8 ",
-        orientation === "horizontal"
-          ? "top-1/2 -left-12 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
-        className
-      )}
-      disabled={!canScrollPrev}
-      onClick={scrollPrev}
-      {...props}
-    >
-      <ArrowLeft />
-      <span className="sr-only">Previous slide</span>
-    </Button>
-  )
-}
-
-function CarouselNext({
-  className,
-  variant = "outline",
-  size = "icon",
-  ...props
-}: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
-
-  return (
-    <Button
-      data-slot="carousel-next"
-      variant={variant}
-      size={size}
-      className={cn(
-        "absolute size-8 ",
-        orientation === "horizontal"
-          ? "top-1/2 -right-12 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
-        className
-      )}
-      disabled={!canScrollNext}
-      onClick={scrollNext}
-      {...props}
-    >
-      <ArrowRight />
-      <span className="sr-only">Next slide</span>
-    </Button>
-  )
-}
-
-export {
-  type CarouselApi,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
+  );
 }
