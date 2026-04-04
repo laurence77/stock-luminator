@@ -26,6 +26,7 @@ import { SignUp } from './pages/SignUp';
 import { DashboardLayout } from './layouts/DashboardLayout';
 import { Markets } from './pages/Markets';
 import { ServicePage } from './pages/ServicePage';
+import TeslaLandingPage from './pages/tesla/TeslaLandingPage';
 
 function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash.toLowerCase());
@@ -55,6 +56,10 @@ function App() {
 
   if (currentHash === '#markets') {
     return <Markets />;
+  }
+
+  if (currentHash === '#service-tesla') {
+    return <TeslaLandingPage />;
   }
 
   if (currentHash.startsWith('#service-')) {
