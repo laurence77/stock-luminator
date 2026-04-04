@@ -1,15 +1,13 @@
 .carousel-container {
   position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 24px;
-  padding: 16px;
-  --outer-r: 24px;
-  --p-distance: 12px;
-  background: rgba(19, 19, 24, 0.5);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  width: var(--base-width, 350px);
+  overflow: hidden; /* we can keep it hidden on x to prevent horizontal scroll */
+  padding: 40px 0; /* Add top/bottom padding to give rotation room, no side borders */
+  width: 100vw;
+  max-width: 100%;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 .carousel-container.round-container {
@@ -19,10 +17,12 @@
 
 .carousel-track {
   display: flex;
-  width: var(--item-width);
+  width: max-content;
   gap: var(--track-gap);
-  perspective: 1000px;
-  perspective-origin: var(--perspective-origin);
+  padding-left: calc(50% - (var(--item-width) / 2));
+  padding-right: calc(50% - (var(--item-width) / 2));
+  perspective: 1200px;
+  align-items: center;
 }
 
 .carousel-item {
@@ -32,14 +32,18 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: calc(var(--outer-r) - var(--p-distance));
-  background-color: #0d0716;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(30, 20, 50, 0.4), rgba(15, 10, 25, 0.6));
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   overflow: hidden;
   cursor: grab;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   width: var(--item-width);
-  height: 100%;
+  height: 400px;
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
 .carousel-item:hover {

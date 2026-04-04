@@ -69,15 +69,21 @@ interface CarouselItemProps {
 
 function CarouselItem({ item, index, round, trackItemOffset, x, transition }: Omit<CarouselItemProps, 'itemWidth'>) {
   const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset];
-  const outputRange = [90, 0, -90];
-  const rotateY = useTransform(x, range, outputRange, { clamp: false });
+  const outputRange = [25, 0, -25];
+  const rotateY = useTransform(x, range, outputRange, { clamp: true });
+  const scale = useTransform(x, range, [0.85, 1, 0.85], { clamp: true });
+  const opacity = useTransform(x, range, [0.3, 1, 0.3], { clamp: true });
+  const zIndex = useTransform(x, range, [0, 10, 0], { clamp: true });
 
   return (
     <motion.div
       key={`${item?.id ?? index}-${index}`}
       className={`carousel-item ${round ? 'round-item' : ''}`}
       style={{
-        rotateY: rotateY
+        rotateY,
+        scale,
+        opacity,
+        zIndex,
       }}
       transition={transition}
     >
@@ -111,8 +117,7 @@ export default function Carousel({
   loop = false,
   round = false
 }: CarouselProps) {
-  const containerPadding = 16;
-  const itemWidth = baseWidth - containerPadding * 2;
+  const itemWidth = baseWidth;
   const trackItemOffset = itemWidth + GAP;
   
   const itemsForRender = useMemo(() => {
@@ -245,7 +250,11 @@ export default function Carousel({
     <div
       ref={containerRef}
       className={`carousel-container ${round ? 'round-container' : ''}`}
-      style={{ '--base-width': `${baseWidth}px` } as React.CSSProperties}
+      style={{ 
+        '--base-width': `${baseWidth}px`,
+        '--item-width': `${itemWidth}px`,
+        '--track-gap': `${GAP}px`
+      } as React.CSSProperties}
     >
       <motion.div
         className="carousel-track"
@@ -285,6 +294,9 @@ export default function Carousel({
                 }}
                 onClick={() => setPosition(loop ? index + 1 : index)}
                 transition={{ duration: 0.15 }}
+                style={{
+                  minWidth: '4px', // ensure flex doesn't squash them
+                }}
               />
             ))}
           </div>
