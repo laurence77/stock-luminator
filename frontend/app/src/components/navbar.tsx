@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, Moon, Sun, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from './theme-provider';
@@ -31,33 +32,33 @@ function translatePage(langCode: string) {
 }
 
 const navItems = [
-  { name: 'ABOUT', href: '#about' },
-  { name: 'TEAM', href: '#team' },
-  { name: 'MIRROR TRADES', href: '#mirror-trades' },
+  { name: 'ABOUT', href: '/#about' },
+  { name: 'TEAM', href: '/team' },
+  { name: 'MIRROR TRADES', href: '/#mirror-trades' },
   { 
     name: 'INVESTMENT PRODUCTS', 
-    href: '#services',
+    href: '/#services',
     dropdown: [
-      { label: 'Option Trading', href: '#service-options-copy-trading' },
-      { label: 'Tesla Ecosystem', href: '#service-tesla' },
-      { label: 'Real Estate', href: '#service-real-estate' },
-      { label: 'Stocks', href: '#service-stock' },
-      { label: 'Infrastructure', href: '#service-infrastructure' },
-      { label: 'Forex Trading', href: '#service-forex' },
-      { label: 'Crypto Asset', href: '#service-crypto' },
-      { label: 'Fixed Income', href: '#service-fixed-income' },
-      { label: 'Agriculture', href: '#service-agriculture' }
+      { label: 'Option Trading', href: '/services/options-copy-trading' },
+      { label: 'Tesla Ecosystem', href: '/services/tesla' },
+      { label: 'Real Estate', href: '/services/real-estate' },
+      { label: 'Stocks', href: '/services/stock' },
+      { label: 'Infrastructure', href: '/services/infrastructure' },
+      { label: 'Forex Trading', href: '/services/forex' },
+      { label: 'Crypto Asset', href: '/services/crypto' },
+      { label: 'Fixed Income', href: '/services/fixed-income' },
+      { label: 'Agriculture', href: '/services/agriculture' }
     ]
   },
   { 
     name: 'PLANNING SERVICES', 
-    href: '#planning',
+    href: '/#planning',
     dropdown: [
-      { label: 'Planning Services', href: '#planning' },
-      { label: 'Assets Management', href: '#services' },
+      { label: 'Planning Services', href: '/#planning' },
+      { label: 'Assets Management', href: '/#services' },
     ]
   },
-  { name: 'INSIGHT', href: '#insight' },
+  { name: 'INSIGHT', href: '/#insight' },
 ];
 
 export function Navbar() {
@@ -102,7 +103,7 @@ export function Navbar() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[88px]">
           {/* Logo */}
-          <a href={`${import.meta.env.BASE_URL}#`} className="flex items-center gap-2 flex-shrink-0">
+          <Link to="/" className="flex items-center gap-2 flex-shrink-0">
             <div className="flex items-end gap-[2px] h-8">
               <div className="w-[3px] h-4 bg-[#3b82f6]"></div>
               <div className="w-[3px] h-6 bg-[#facc15]"></div>
@@ -112,7 +113,7 @@ export function Navbar() {
               <span className="text-[13px] font-bold text-[#facc15] tracking-wide m-0 p-0 leading-tight">STOCKMARKET</span>
               <span className="text-[13px] font-bold text-[#7c3aed] tracking-widest m-0 p-0 leading-tight">LUMINATOR</span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden xl:flex items-center gap-6 ml-auto mr-8">
@@ -123,12 +124,12 @@ export function Navbar() {
                 onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <a
-                  href={item.href}
+                <Link
+                  to={item.href}
                   className="flex items-center gap-1 py-6 text-[13px] font-semibold text-gray-800 dark:text-gray-200 hover:text-[#7c3aed] transition-colors tracking-wide"
                 >
                   {item.name}
-                </a>
+                </Link>
                 
                 {/* Dropdown */}
                 <AnimatePresence>
@@ -141,13 +142,13 @@ export function Navbar() {
                       className="absolute top-full left-0 w-56 bg-white dark:bg-[#131318] shadow-lg py-2 z-50"
                     >
                       {item.dropdown.map((subItem) => (
-                        <a
+                        <Link
                           key={subItem.label}
-                          href={subItem.href}
+                          to={subItem.href}
                           className="block px-4 py-2 text-[13px] text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-[#7c3aed] dark:hover:text-[#7c3aed] transition-colors"
                         >
                           {subItem.label}
-                        </a>
+                        </Link>
                       ))}
                     </motion.div>
                   )}
@@ -213,9 +214,9 @@ export function Navbar() {
 
 
             </div>
-            <a href={`${import.meta.env.BASE_URL}#signup`} className="bg-[#7c3aed] hover:bg-[#6d28d9] text-white px-6 py-3 text-[13px] font-bold tracking-wider transition-colors inline-block text-center">
+            <Link to="/signup" className="bg-[#7c3aed] hover:bg-[#6d28d9] text-white px-6 py-3 text-[13px] font-bold tracking-wider transition-colors inline-block text-center">
               GET STARTED
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -249,19 +250,19 @@ export function Navbar() {
               </div>
               {navItems.map((item) => (
                 <div key={item.name}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className="block px-4 py-3 text-sm font-semibold text-gray-800 dark:text-gray-200 hover:text-[#7c3aed] hover:bg-gray-50 dark:hover:bg-white/5 "
                     onClick={() => !item.dropdown && setIsMobileMenuOpen(false)}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 </div>
               ))}
               <div className="pt-4 space-y-4">
-                <a href="#get-started" className="block w-full text-center bg-[#7c3aed] text-white px-6 py-4 text-sm font-bold tracking-wider">
+                <Link to="/signup" className="block w-full text-center bg-[#7c3aed] text-white px-6 py-4 text-sm font-bold tracking-wider">
                   GET STARTED
-                </a>
+                </Link>
               </div>
             </nav>
           </motion.div>

@@ -82,3 +82,18 @@ export const slideInRight: Variants = {
 
 /** Viewport trigger options shared across all in-view sections */
 export const viewportOptions = { once: true, margin: '-100px' };
+
+/** Antigravity Floating Animation */
+export const floatingAnimation: Variants = {
+  hidden: { y: 0 },
+  visible: (custom = { duration: 6, delay: 0 }) => ({
+    y: ['-3%', '3%', '-3%'],
+    transition: {
+      duration: custom.duration,
+      delay: custom.delay,
+      repeat: Infinity,
+      ease: 'easeInOut',
+    },
+  }),
+};
+

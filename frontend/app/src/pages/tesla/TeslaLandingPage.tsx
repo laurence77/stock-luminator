@@ -6,7 +6,7 @@ import TeslaProductPillars from '../../sections/tesla/TeslaProductPillars';
 import TeslaStats from '../../sections/tesla/TeslaStats';
 import TeslaEcosystem from '../../sections/tesla/TeslaEcosystem';
 import TeslaQuotes from '../../sections/tesla/TeslaQuotes';
-import { Navbar } from '../../components/navbar';
+import { Link } from 'react-router-dom';
 
 export default function TeslaLandingPage() {
   useEffect(() => {
@@ -14,8 +14,7 @@ export default function TeslaLandingPage() {
   }, []);
 
   return (
-    <div className="bg-[#131318] min-h-screen selection:bg-[#00fbfb]/30 selection:text-white">
-      <Navbar />
+    <>
       {/* Custom Progress Bar */}
       <motion.div 
         initial={{ scaleX: 0 }}
@@ -75,12 +74,12 @@ export default function TeslaLandingPage() {
                   variants={fadeInUp}
                   className="flex flex-col md:flex-row gap-6 justify-center items-center"
                 >
-                   <a href={`${import.meta.env.BASE_URL}#signup`} className="bg-[#00fbfb] hover:bg-[#6305ef] text-[#131318] hover:text-white px-12 py-5 text-[15px] font-bold tracking-[0.1em] uppercase transition-all shadow-2xl shadow-[#00fbfb]/20 inline-block text-center">
+                   <Link to="/signup" className="bg-[#00fbfb] hover:bg-[#6305ef] text-[#131318] hover:text-white px-12 py-5 text-[15px] font-bold tracking-[0.1em] uppercase transition-all shadow-2xl shadow-[#00fbfb]/20 inline-block text-center">
                       Invest in Tesla Now
-                   </a>
-                   <a href={`${import.meta.env.BASE_URL}#services`} className="text-white/60 font-bold hover:text-white text-[13px] tracking-[0.2em] uppercase transition-colors">
+                   </Link>
+                   <Link to="/" className="text-white/60 font-bold hover:text-white text-[13px] tracking-[0.2em] uppercase transition-colors">
                       Back to All Services
-                   </a>
+                   </Link>
                 </motion.div>
               </motion.div>
            </div>
@@ -95,6 +94,6 @@ export default function TeslaLandingPage() {
            </p>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
