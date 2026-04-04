@@ -95,7 +95,7 @@ export function PricingPlans() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              aria-pressed={activeTab === tab ? 'true' : 'false'}
+              aria-pressed={activeTab === tab}
               className={`px-8 py-3 text-[14px] font-bold tracking-wider uppercase transition-all duration-300 relative  ${
                 activeTab === tab
                   ? 'bg-gray-50 dark:bg-[#1b1b20] text-[#7c3aed] border-[#7c3aed] shadow-[0_0_20px_rgba(124,58,237,0.15)]'
