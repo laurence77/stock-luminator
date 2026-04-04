@@ -1,0 +1,59 @@
+
+> my-app@0.0.0 lint
+> eslint .
+
+
+/Users/laurence/Documents/broker/frontend/app/src/components/Waves.tsx
+   61:11  error  'v' is never reassigned. Use 'const' instead                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          prefer-const
+  166:37  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/laurence/Documents/broker/frontend/app/src/components/Waves.tsx:166:37
+  164 |     top: 0
+  165 |   });
+> 166 |   const noiseRef = useRef(new Noise(Math.random()));
+      |                                     ^^^^^^^^^^^^^ Cannot call impure function
+  167 |   const linesRef = useRef<Point[][]>([]);
+  168 |   const mouseRef = useRef<Mouse>({
+  169 |     x: -10,  react-hooks/purity
+
+/Users/laurence/Documents/broker/frontend/app/src/components/navbar.tsx
+  2:19  error  'ChevronDown' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/laurence/Documents/broker/frontend/app/src/components/ui/badge.tsx
+  46:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/laurence/Documents/broker/frontend/app/src/components/ui/button-group.tsx
+  82:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/laurence/Documents/broker/frontend/app/src/components/ui/button.tsx
+  62:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/laurence/Documents/broker/frontend/app/src/components/ui/form.tsx
+  159:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/laurence/Documents/broker/frontend/app/src/components/ui/navigation-menu.tsx
+  167:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/laurence/Documents/broker/frontend/app/src/components/ui/sidebar.tsx
+  611:26  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/laurence/Documents/broker/frontend/app/src/components/ui/sidebar.tsx:611:26
+  609 |   // Random width between 50 to 90%.
+  610 |   const width = React.useMemo(() => {
+> 611 |     return `${Math.floor(Math.random() * 40) + 50}%`
+      |                          ^^^^^^^^^^^^^ Cannot call impure function
+  612 |   }, [])
+  613 |
+  614 |   return (  react-hooks/purity
+  725:3   error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-refresh/only-export-components
+
+/Users/laurence/Documents/broker/frontend/app/src/components/ui/toggle.tsx
+  45:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+✖ 11 problems (11 errors, 0 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

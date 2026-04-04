@@ -1,0 +1,73 @@
+import { motion } from 'framer-motion';
+import { slideInLeft, slideInRight, viewportOptions } from '../lib/animations';
+import { SectionHeader } from '../components/ui/SectionHeader';
+import DotGrid from '../components/ui/DotGrid';
+import { useTheme } from '../components/theme-provider';
+
+export function WhoWeAre() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
+  return (
+    <section id="about" className="py-[100px] bg-[#fdfdfd] dark:bg-[#131318] transition-colors duration-300 relative overflow-hidden">
+      {/* DotGrid Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <DotGrid
+          dotSize={5}
+          gap={15}
+          baseColor={isDark ? '#271E37' : '#c8c8d4'}
+          activeColor={isDark ? '#7c3aed' : '#7c3aed'}
+          proximity={120}
+          shockRadius={250}
+          shockStrength={5}
+          resistance={750}
+          returnDuration={1.5}
+        />
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <SectionHeader title="Who We Are" />
+
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Left - Text */}
+          <motion.div
+            variants={slideInLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOptions}
+            className="pl-0 lg:pl-10 text-left"
+          >
+            <h3 className="text-[24px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-6 uppercase tracking-[-0.02em] transition-colors duration-300">
+              Your Premier Wealth Partner
+            </h3>
+            <p className="text-[16px] text-gray-600 dark:text-gray-400 leading-relaxed mb-6 transition-colors duration-300">
+              At Stock Market Luminator, we operate at the intersection of quantitative analysis and bespoke wealth advisory. We initiate every partnership with a comprehensive audit of your unique financial architecture—structuring a top-down risk-adjusted portfolio that integrates private equity, alternative asset funds, fixed-income yields, and global equities.
+            </p>
+            <p className="text-[16px] text-gray-600 dark:text-gray-400 leading-relaxed transition-colors duration-300">
+              We believe that sophisticated asset allocation is the primary driver of generational compounding. Our investment committee continuously identifies geopolitical and macroeconomic shifts to rebalance exposures dynamically across emerging market sectors. By applying proprietary algorithmic screening to individual securities, we execute an active, data-driven approach designed to consistently generate alpha and shield your capital from market volatility.
+            </p>
+          </motion.div>
+
+          {/* Right - Image */}
+          <motion.div
+            variants={slideInRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOptions}
+            className="relative"
+          >
+            <div className="w-full h-[500px] border-gray-100">
+              <img
+                src="/images/who-we-are.jpg"
+                alt="Business professionals collaborating"
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
