@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportOptions } from '../../lib/animations';
 import TeslaHero from '../../sections/tesla/TeslaHero';
+import TeslaProductPillars from '../../sections/tesla/TeslaProductPillars';
 import TeslaStats from '../../sections/tesla/TeslaStats';
 import TeslaEcosystem from '../../sections/tesla/TeslaEcosystem';
 import TeslaQuotes from '../../sections/tesla/TeslaQuotes';
@@ -25,13 +26,21 @@ export default function TeslaLandingPage() {
       <main>
         <TeslaHero />
         
-        <div id="stats">
+        {/* Core Product Pillars (Cinematic Parallax) */}
+        <TeslaProductPillars />
+
+        {/* Financial Growth Logic */}
+        <div id="stats" className="border-t border-white/5">
           <TeslaStats />
         </div>
 
-        <TeslaEcosystem />
+        {/* Ecosystem Overview */}
+        <div className="border-t border-white/5">
+          <TeslaEcosystem />
+        </div>
 
-        <div className="py-24 bg-[#1b1b20]">
+        {/* Analyst Validation */}
+        <div className="py-24 bg-[#1b1b20] border-t border-white/5">
            <TeslaQuotes />
         </div>
 
@@ -67,7 +76,7 @@ export default function TeslaLandingPage() {
                    <button className="bg-[#00fbfb] hover:bg-[#6305ef] text-[#131318] hover:text-white px-12 py-5 text-[15px] font-bold tracking-[0.1em] uppercase transition-all shadow-2xl shadow-[#00fbfb]/20">
                       Invest in Tesla Now
                    </button>
-                   <a href="/#services" className="text-white/60 hover:text-white text-[13px] font-bold tracking-[0.2em] uppercase transition-colors">
+                   <a href={`${import.meta.env.BASE_URL}#services`} className="text-white/60 hover:text-white text-[13px] font-bold tracking-[0.2em] uppercase transition-colors">
                       Back to All Services
                    </a>
                 </motion.div>

@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin } from 'lucide-react';
 
 const usefulLinks = [
-  'Home',
-  'About Us',
-  'Pricing',
-  'Services',
-  'Contact Us',
+  { name: 'Home', href: '#' },
+  { name: 'About Us', href: '#about' },
+  { name: 'Pricing', href: '#pricing' },
+  { name: 'Services', href: '#services' },
+  { name: 'Contact Us', href: '#contact' },
 ];
 
 const serviceLinks = [
@@ -43,12 +43,12 @@ export function Footer() {
             <h4 className="text-[16px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent uppercase tracking-[-0.02em]st mb-8">Useful Links</h4>
             <ul className="space-y-4">
               {usefulLinks.map((link) => (
-                <li key={link}>
+                <li key={link.name}>
                   <a
-                    href="#"
+                    href={`${import.meta.env.BASE_URL}${link.href}`}
                     className="text-gray-500 dark:text-gray-400 text-[15px] hover:text-[#1e40af] dark:hover:text-[#60a5fa] font-light transition-colors"
                   >
-                    {link}
+                    {link.name}
                   </a>
                 </li>
               ))}

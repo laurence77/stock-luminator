@@ -100,7 +100,7 @@ export function Navbar() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[88px]">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 flex-shrink-0">
+          <a href={`${import.meta.env.BASE_URL}#`} className="flex items-center gap-2 flex-shrink-0">
             <div className="flex items-end gap-[2px] h-8">
               <div className="w-[3px] h-4 bg-[#3b82f6]"></div>
               <div className="w-[3px] h-6 bg-[#facc15]"></div>
@@ -211,7 +211,7 @@ export function Navbar() {
 
 
             </div>
-            <a href="#get-started" className="bg-[#7c3aed] hover:bg-[#6d28d9] text-white px-6 py-3 text-[13px] font-bold tracking-wider transition-colors inline-block text-center">
+            <a href={`${import.meta.env.BASE_URL}#signup`} className="bg-[#7c3aed] hover:bg-[#6d28d9] text-white px-6 py-3 text-[13px] font-bold tracking-wider transition-colors inline-block text-center">
               GET STARTED
             </a>
           </div>
