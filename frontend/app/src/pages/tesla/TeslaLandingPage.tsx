@@ -6,6 +6,7 @@ import TeslaProductPillars from '../../sections/tesla/TeslaProductPillars';
 import TeslaStats from '../../sections/tesla/TeslaStats';
 import TeslaEcosystem from '../../sections/tesla/TeslaEcosystem';
 import TeslaQuotes from '../../sections/tesla/TeslaQuotes';
+import { Navbar } from '../../components/navbar';
 
 export default function TeslaLandingPage() {
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function TeslaLandingPage() {
 
   return (
     <div className="bg-[#131318] min-h-screen selection:bg-[#00fbfb]/30 selection:text-white">
+      <Navbar />
       {/* Custom Progress Bar */}
       <motion.div 
         initial={{ scaleX: 0 }}

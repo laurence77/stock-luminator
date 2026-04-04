@@ -39,6 +39,7 @@ const navItems = [
     href: '#services',
     dropdown: [
       { label: 'Option Trading', href: '#service-options-copy-trading' },
+      { label: 'Tesla Ecosystem', href: '#service-tesla' },
       { label: 'Real Estate', href: '#service-real-estate' },
       { label: 'Stocks', href: '#service-stock' },
       { label: 'Infrastructure', href: '#service-infrastructure' },
