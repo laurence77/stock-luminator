@@ -42,8 +42,8 @@ export function Infrastructure() {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="lg:w-1/2 bg-gradient-to-br from-[#1e40af] via-[#312e81] to-[#7c3aed] text-white p-12 lg:p-20 flex flex-col justify-center"
         >
-          <h3 className="text-[28px] lg:text-[36px] font-bold mb-8 leading-tight">
-            How to trade Infrastructure in four steps
+          <h3 className="text-[28px] lg:text-[44px] font-extrabold mb-8 leading-tight tracking-[-0.02em] uppercase select-none">
+            Infrastructure Trading
           </h3>
           <ul className="space-y-6">
             {steps.map((step) => (
@@ -74,8 +74,8 @@ export function Infrastructure() {
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-        <h3 className="text-[28px] font-bold text-gray-900 dark:text-white mb-6 text-center transition-colors duration-300">
-          Infrastructure
+        <h3 className="text-[32px] md:text-[44px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-8 text-center tracking-[-0.02em] uppercase transition-colors duration-300 select-none">
+          Network Architecture
         </h3>
         <div className="text-[16px] text-gray-600 dark:text-gray-400 leading-relaxed max-w-[900px] mx-auto space-y-6 transition-colors duration-300">
           <p>

@@ -18,7 +18,7 @@ const serviceLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-white dark:bg-gray-950 dark:border-gray-800">
+    <footer className="bg-white dark:bg-[#131318] border-t border-gray-100 dark:border-white/5">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-[100px]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -95,9 +95,9 @@ export function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="dark:bg-[#f8f9fa] dark:bg-gray-900">
+      <div className="bg-gray-50 dark:bg-[#1b1b20] border-t border-gray-100 dark:border-white/5">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <p className="text-center text-gray-400 dark:text-gray-500 text-[14px]">
+          <p className="text-center text-gray-500 dark:text-gray-400 text-[14px] font-medium tracking-wide">
             © {new Date().getFullYear()} Stock Market Luminator. All Rights Reserved.
           </p>
         </div>

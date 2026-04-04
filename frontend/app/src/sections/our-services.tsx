@@ -105,12 +105,12 @@ export function OurServices() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           >
-            <h2 className="text-[32px] md:text-[40px] font-bold text-gray-900 dark:text-white mb-6 tracking-wide transition-colors duration-300">
+            <h2 className="text-[32px] md:text-[44px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-6 tracking-[-0.02em] uppercase transition-colors duration-300 select-none">
               OUR SERVICES
             </h2>
             <div className="flex justify-center gap-1.5 mb-10">
-              <div className="w-10 h-0.5 bg-[#60a5fa]" />
-              <div className="w-[50px] h-0.5 bg-[#1e40af]" />
+              <div className="w-10 h-[3px] bg-[#1e40af]" />
+              <div className="w-[50px] h-[3px] bg-[#7c3aed]" />
             </div>
             <p className="text-[17px] text-gray-600 dark:text-gray-400 leading-[1.8] max-w-[800px] mx-auto transition-colors duration-300">
               Precision execution across global asset classes. We leverage proprietary models and deep market liquidity to deliver superior risk-adjusted returns.
