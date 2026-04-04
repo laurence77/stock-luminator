@@ -22,9 +22,9 @@ export function ResponsibleInvesting() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-            className="pl-0 lg:pl-10 text-left"
+            className="pl-0 lg:pl-10 text-left bg-white/85 dark:bg-white/5 backdrop-blur-xl p-10 lg:p-14 border border-gray-100 dark:border-white/10 shadow-2xl relative z-20"
           >
-            <h3 className="text-[32px] md:text-[40px] font-bold text-[#7c3aed] mb-4 tracking-wide uppercase transition-colors duration-300">
+            <h3 className="text-[32px] md:text-[40px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-6 uppercase tracking-[-0.02em] transition-colors duration-300">
               Responsible Investing
             </h3>
             <div className="w-[50px] h-1 bg-[#10b981] mb-8" />
@@ -37,7 +37,7 @@ export function ResponsibleInvesting() {
               effectively, they help us to protect and enhance reputation and financial performance 
               whilst creating stronger, more valuable companies which can create benefits for all 
               stakeholders: from employees to customers, suppliers to shareholders, and the wider 
-              community at large.
+ Community at large.
             </p>
             
             <p className="text-[17px] text-gray-600 dark:text-gray-400 leading-[1.8] transition-colors duration-300">
@@ -56,14 +56,14 @@ export function ResponsibleInvesting() {
             <div className="w-full h-[550px] relative z-0">
               <div className="absolute inset-0">
                 <img
-                  src="/images/responsible-investing.jpg"
+                  src={`${import.meta.env.BASE_URL}images/responsible-investing.jpg`}
                   alt="Sustainable corporate building"
                   className="w-full h-full object-cover"
                 />
               </div>
               
               {/* Floating Notification Box */}
-              <div className="absolute -top-6 -right-6 lg:-right-10 bg-white dark:bg-[#131318] shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-none p-5 z-10 flex items-center gap-3 transition-colors duration-300">
+              <div className="absolute -top-6 -right-6 lg:-right-10 bg-white/80 dark:bg-[#131318]/80 backdrop-blur-md border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-none p-5 z-10 flex items-center gap-3 transition-colors duration-300">
                 <div className="w-2 h-2  bg-[#10b981] animate-pulse" />
                 <p className="text-[15px] text-gray-600 dark:text-gray-400 m-0 leading-tight transition-colors duration-300">
                   Someone from <span className="font-bold text-gray-900 dark:text-white transition-colors duration-300">South Africa</span> just invested <span className="text-[#10b981] font-bold">$1,500</span>

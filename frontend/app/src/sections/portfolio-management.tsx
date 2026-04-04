@@ -25,7 +25,7 @@ export function PortfolioManagement() {
         >
           <div className="absolute inset-0">
             <img
-              src="/images/portfolio-meeting.jpg"
+              src={`${import.meta.env.BASE_URL}images/portfolio-meeting.jpg`}
               alt="Professional team meeting"
               className="w-full h-full object-cover"
             />
@@ -38,18 +38,18 @@ export function PortfolioManagement() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="lg:w-1/2 bg-[#6d28d9] text-white p-12 lg:p-[100px] flex flex-col justify-center"
+          className="lg:w-1/2 bg-[#6d28d9]/95 backdrop-blur-xl text-white p-12 lg:p-[100px] flex flex-col justify-center border-l border-white/10 shadow-2xl relative z-20"
         >
-          <h3 className="text-[36px] font-bold text-white mb-10 leading-tight">
+          <h3 className="text-[36px] lg:text-[42px] font-extrabold text-white mb-10 leading-tight tracking-[-0.02em] uppercase">
             Institutional Portfolio Engineering
           </h3>
           
-          <p className="text-[17px] text-white/90 leading-[1.8] mb-8 font-light">
+          <p className="text-[17px] text-white/95 leading-[1.8] mb-8 font-light">
             We abandon passive methodologies. Portfolio engineering at Stock Market Luminator requires algorithmic rigor and constant dynamic rebalancing. We fuse a top-down macroeconomic framework with aggressive micro-catalyst targeting to construct highly defensive, alpha-generating capital allocations.
           </p>
           
-          <p className="text-[17px] text-white/90 leading-[1.8] font-light">
-            This uncompromising systemic edge manages over <span className="font-bold text-white">$649 Billion</span> globally across sovereign wealth entities, aggressive hedge funds, and elite family offices.
+          <p className="text-[17px] text-white/95 leading-[1.8] font-light">
+            This uncompromising systemic edge manages over <span className="font-bold text-[#00fbfb]">$649 Billion</span> globally across sovereign wealth entities, aggressive hedge funds, and elite family offices.
           </p>
         </motion.div>
       </div>

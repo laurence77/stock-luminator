@@ -65,7 +65,7 @@ export function Infrastructure() {
         >
           <div className="absolute inset-0 bg-[#f8f9fa] dark:bg-black transition-colors duration-300">
             <img
-              src="/images/infrastructure.jpg"
+              src={`${import.meta.env.BASE_URL}images/infrastructure.jpg`}
               alt="Infrastructure Trading"
               className="w-full h-full object-cover opacity-90 dark:opacity-75 transition-opacity duration-300"
             />
@@ -74,23 +74,31 @@ export function Infrastructure() {
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-        <h3 className="text-[32px] md:text-[44px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-8 text-center tracking-[-0.02em] uppercase transition-colors duration-300 select-none">
-          Network Architecture
-        </h3>
-        <div className="text-[16px] text-gray-600 dark:text-gray-400 leading-relaxed max-w-[900px] mx-auto space-y-6 transition-colors duration-300">
-          <p>
-            Superior execution requires superior infrastructure. Stock Market Luminator operates an ultra-low latency architecture directly matching primary exchange execution engines, driving the absolute vanguard of high-frequency and systemic trading.
-          </p>
-          <p>
-            Our core processing facility is built exclusively on advanced algorithmic frameworks and private dark-fiber networks ensuring that institutional order flow is handled with zero slippage and absolute maximum efficiency.
-          </p>
-          <p>
-            By leveraging redundant, military-grade data silos and predictive routing pathways, our platform ensures impenetrable security while seamlessly matching highly complex multi-leg derivative transactions in microseconds.
-          </p>
-          <p>
-            This fundamental backbone is what allows our sovereign, enterprise, and high-net-worth operators to innovate their strategies relentlessly, operating at speeds where the broader retail market cannot even perceive the data.
-          </p>
-        </div>
+        <motion.div
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true, margin: '-100px' }}
+           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+           className="bg-white/85 dark:bg-white/5 backdrop-blur-xl p-10 lg:p-14 border border-gray-100 dark:border-white/10 shadow-2xl relative z-20"
+        >
+          <h3 className="text-[32px] md:text-[44px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-8 text-center tracking-[-0.02em] uppercase transition-colors duration-300 select-none">
+            Network Architecture
+          </h3>
+          <div className="text-[16px] text-gray-600 dark:text-gray-400 leading-relaxed max-w-[900px] mx-auto space-y-6 transition-colors duration-300">
+            <p>
+              Superior execution requires superior infrastructure. Stock Market Luminator operates an ultra-low latency architecture directly matching primary exchange execution engines, driving the absolute vanguard of high-frequency and systemic trading.
+            </p>
+            <p>
+              Our core processing facility is built exclusively on advanced algorithmic frameworks and private dark-fiber networks ensuring that institutional order flow is handled with zero slippage and absolute maximum efficiency.
+            </p>
+            <p>
+              By leveraging redundant, military-grade data silos and predictive routing pathways, our platform ensures impenetrable security while seamlessly matching highly complex multi-leg derivative transactions in microseconds.
+            </p>
+            <p>
+              This fundamental backbone is what allows our sovereign, enterprise, and high-net-worth operators to innovate their strategies relentlessly, operating at speeds where the broader retail market cannot even perceive the data.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

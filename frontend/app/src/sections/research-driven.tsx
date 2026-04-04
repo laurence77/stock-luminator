@@ -47,9 +47,10 @@ export function ResearchDriven() {
             <motion.div
               key={value.title}
               variants={fadeInUp}
-              className="bg-transparent pl-4 border-l-2 border-[#7c3aed]"
+              className="bg-white/85 dark:bg-white/5 backdrop-blur-xl p-8 lg:p-10 border border-gray-100 dark:border-white/10 shadow-xl relative z-20 transition-all duration-300 hover:border-[#7c3aed]/50 dark:hover:border-[#7c3aed]/50 group"
             >
-              <h4 className="text-[20px] font-bold text-[#7c3aed] dark:text-[#a78bfa] mb-3 leading-tight">
+              <div className="w-12 h-1 bg-[#7c3aed] mb-6 transition-all duration-500 group-hover:w-20" />
+              <h4 className="text-[20px] lg:text-[22px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-4 leading-tight uppercase tracking-[-0.02em]">
                 {value.title}
               </h4>
               <p className="text-gray-600 dark:text-gray-400 text-[16px] leading-[1.8] font-light transition-colors duration-300">

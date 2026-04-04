@@ -17,12 +17,13 @@ export function RiskManagement() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          className="bg-white/10 backdrop-blur-xl p-10 lg:p-16 border border-white/20 shadow-2xl relative z-20"
         >
           <h3 className="text-[32px] md:text-[40px] font-bold text-white mb-8 tracking-wide uppercase">
             Multidimensional risk management
           </h3>
           
-          <p className="text-[17px] text-white/90 leading-[1.8] font-light">
+          <p className="text-[17px] text-white/95 leading-[1.8] font-light">
             Capital preservation is the foundation of our entire investment framework. We engineer robust, multi-factor risk modules that stress-test portfolios against severe macroeconomic tail-events. An independent, deeply embedded risk committee continuously audits exposure limits and quantitative leverage constraints to ensure your capital remains insulated.
           </p>
         </motion.div>

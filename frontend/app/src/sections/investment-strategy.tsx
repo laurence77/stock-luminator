@@ -72,7 +72,7 @@ export function InvestmentStrategy() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-16 bg-white/80 dark:bg-white/5 backdrop-blur-xl p-10 lg:p-14 border border-gray-100 dark:border-white/10 shadow-2xl relative z-20 max-w-[1000px] mx-auto"
         >
           <h2 className="text-[32px] md:text-[40px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-6 tracking-[-0.02em] uppercase transition-colors duration-300">
             INVESTMENT STRATEGY

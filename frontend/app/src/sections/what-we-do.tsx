@@ -21,8 +21,9 @@ export function WhatWeDo() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          className="bg-white/85 dark:bg-white/5 backdrop-blur-xl p-10 lg:p-14 border border-gray-100 dark:border-white/10 shadow-2xl relative z-20 max-w-[900px] mx-auto"
         >
-          <h2 className="text-[32px] md:text-[40px] font-bold text-gray-900 dark:text-white mb-6 tracking-wide transition-colors duration-300">
+          <h2 className="text-[32px] md:text-[40px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-6 tracking-[-0.02em] uppercase transition-colors duration-300">
             WHAT WE DO
           </h2>
           <div className="flex justify-center gap-1.5 mb-10">
@@ -36,14 +37,14 @@ export function WhatWeDo() {
           
           <div className="mb-14">
             <a href="#certificate"
-              className="bg-[#7c3aed] hover:bg-[#6d28d9] text-white px-10 py-4 text-[15px] font-semibold tracking-wider transition-colors inline-block"
+              className="bg-[#7c3aed] hover:bg-[#6d28d9] text-white px-10 py-4 text-[15px] font-bold tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl inline-block uppercase"
             >
               View Certificate of Incorporation
             </a>
           </div>
           
           <p className="text-[13px] font-bold text-gray-400 tracking-[0.2em] uppercase">
-            FINANCIAL PLANNING
+            ESTABLISHED FINANCIAL PLANNING AUTHORITY
           </p>
         </motion.div>
       </div>

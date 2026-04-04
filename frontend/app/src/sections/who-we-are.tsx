@@ -36,9 +36,9 @@ export function WhoWeAre() {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOptions}
-            className="pl-0 lg:pl-10 text-left"
+            className="pl-0 lg:pl-10 text-left bg-white/85 dark:bg-white/5 backdrop-blur-xl p-8 lg:p-12 border border-gray-100 dark:border-white/10 shadow-2xl relative z-20"
           >
-            <h3 className="text-[24px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-6 uppercase tracking-[-0.02em] transition-colors duration-300">
+            <h3 className="text-[24px] lg:text-[28px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent mb-8 uppercase tracking-[-0.02em] transition-colors duration-300">
               Your Premier Wealth Partner
             </h3>
             <p className="text-[16px] text-gray-600 dark:text-gray-400 leading-relaxed mb-6 transition-colors duration-300">
@@ -59,7 +59,7 @@ export function WhoWeAre() {
           >
             <div className="w-full h-[500px] border-gray-100">
               <img
-                src="/images/who-we-are.jpg"
+                src={`${import.meta.env.BASE_URL}images/who-we-are.jpg`}
                 alt="Business professionals collaborating"
                 loading="lazy"
                 className="w-full h-full object-cover"

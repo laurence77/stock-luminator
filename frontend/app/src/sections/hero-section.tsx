@@ -6,8 +6,11 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center pt-[88px]">
       {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/images/hero-bg.jpg')]">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
+        style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/hero-bg.jpg')` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
       </div>
 
       {/* Content */}
