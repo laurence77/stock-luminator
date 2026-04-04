@@ -117,9 +117,9 @@ export function PricingPlans() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className={`relative bg-white dark:bg-[#1b1b20] ${
-                  plan.popular ? 'border-[#7c3aed]' : 'dark:border-white/10'
-                } flex flex-col group transition-all duration-300 hover:bg-gray-50 dark:hover:bg-[#2a292f]`}
+                className={`relative luminous-glass overflow-hidden ${
+                  plan.popular ? 'ring-1 ring-[#7c3aed] shadow-[0_0_30px_rgba(124,58,237,0.2)]' : ''
+                } flex flex-col group transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl`}
               >
                 {/* Popular Badge */}
                 {plan.popular && (

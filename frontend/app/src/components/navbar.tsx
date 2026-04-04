@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Moon, Sun, Globe } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionTemplate } from 'framer-motion';
 import { useTheme } from './theme-provider';
+import { useScrollVelocity } from '../hooks/useScrollVelocity';
 
 const languages = [
   { code: '', name: 'Original (EN)' },
@@ -65,10 +66,16 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+  const location = useLocation();
+  const currentPath = location.pathname + location.hash;
   const { theme, setTheme } = useTheme();
   const [langOpen, setLangOpen] = useState(false);
   const [activeLang, setActiveLang] = useState('Original (EN)');
   const langRef = useRef<HTMLDivElement>(null);
+
+  const { blurFilter, bgOpacity } = useScrollVelocity();
+  const dynamicBg = useMotionTemplate`rgba(${theme === 'dark' ? '19, 19, 24' : '255, 255, 255'}, ${bgOpacity})`;
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -94,9 +101,13 @@ export function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      style={{
+        backdropFilter: isScrolled ? blurFilter : 'none',
+        backgroundColor: isScrolled ? dynamicBg : undefined,
+      }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 ${
         isScrolled 
-          ? 'bg-white dark:bg-[#131318] shadow-md dark:shadow-white/5' 
+          ? 'shadow-md dark:shadow-white/5 border-b border-black/5 dark:border-white/5' 
           : 'bg-white dark:bg-[#131318]'
       }`}
     >
@@ -121,14 +132,29 @@ export function Navbar() {
               <div
                 key={item.name}
                 className="relative group"
-                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
-                onMouseLeave={() => setActiveDropdown(null)}
+                onMouseEnter={() => {
+                  if (item.dropdown) {
+                    setActiveDropdown(item.name);
+                  }
+                  setHoveredNav(item.name);
+                }}
+                onMouseLeave={() => {
+                  setActiveDropdown(null);
+                  setHoveredNav(null);
+                }}
               >
                 <Link
                   to={item.href}
-                  className="flex items-center gap-1 py-6 text-[13px] font-semibold text-gray-800 dark:text-gray-200 hover:text-[#7c3aed] transition-colors tracking-wide"
+                  className="flex items-center gap-1 py-6 px-3 text-[13px] font-semibold text-gray-800 dark:text-gray-200 hover:text-[#7c3aed] transition-colors tracking-wide relative z-10"
                 >
-                  {item.name}
+                  <span className="relative z-10">{item.name}</span>
+                  {(hoveredNav === item.name || currentPath === item.href) && (
+                    <motion.div 
+                      layoutId="nav-indicator" 
+                      className="absolute left-0 right-0 top-4 bottom-4 bg-[#7c3aed]/10 dark:bg-white/10 rounded-full z-0"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    />
+                  )}
                 </Link>
                 
                 {/* Dropdown */}

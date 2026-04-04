@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { AdvancedRealTimeChart } from "react-ts-tradingview-widgets";
 import Waves from '../components/Waves';
@@ -14,6 +14,49 @@ const symbolMap: Record<string, string> = {
   'Tesla': 'NASDAQ:TSLA',
   'Netflix': 'NASDAQ:NFLX',
 };
+
+const flashVariant = {
+  initial: { color: 'inherit' },
+  up: { color: '#10B981', textShadow: '0 0 15px rgba(16,185,129,0.5)' },
+  down: { color: '#EF4444', textShadow: '0 0 15px rgba(239,68,68,0.5)' }
+};
+
+const PriceTicker = memo(({ symbol }: { symbol: string }) => {
+  const [price, setPrice] = useState(() => (Math.random() * 1000 + 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+  const [status, setStatus] = useState<'initial' | 'up' | 'down'>('initial');
+  const priceRef = useRef(parseFloat(price.replace(/,/g, '')));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const delta = (Math.random() - 0.5) * 8;
+      const newPrice = Math.max(0.1, priceRef.current + delta);
+      
+      setStatus(delta > 0 ? 'up' : 'down');
+      setPrice(newPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+      priceRef.current = newPrice;
+      
+      // Reset layout flash
+      setTimeout(() => setStatus('initial'), 600);
+    }, 2000 + Math.random() * 3000); 
+
+    return () => clearInterval(interval);
+  }, [symbol]);
+
+  return (
+    <div className="flex flex-col items-center justify-center p-6 bg-white/50 dark:bg-[#1b1b20]/50 backdrop-blur-md rounded-xl ring-1 ring-gray-200 dark:ring-white/10 mb-8 max-w-[280px] mx-auto">
+      <span className="text-gray-500 dark:text-gray-400 text-[11px] font-bold tracking-[0.2em] uppercase mb-2">{symbol} LIVE INDEX</span>
+      <motion.div
+        variants={flashVariant}
+        initial="initial"
+        animate={status}
+        transition={{ duration: 0.4 }}
+        className="text-[32px] font-black tracking-tighter"
+      >
+        ${price}
+      </motion.div>
+    </div>
+  );
+});
 
 export function TradingChart() {
   const [activeTab, setActiveTab] = useState('Gold');
@@ -63,6 +106,9 @@ export function TradingChart() {
             </button>
           ))}
         </motion.div>
+
+        {/* Dynamic High Frame-Rate Ticker */}
+        <PriceTicker symbol={activeTab} />
 
         {/* Chart Area */}
         <motion.div

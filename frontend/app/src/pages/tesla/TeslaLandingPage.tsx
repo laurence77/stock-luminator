@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportOptions } from '../../lib/animations';
 import TeslaHero from '../../sections/tesla/TeslaHero';
 import TeslaProductPillars from '../../sections/tesla/TeslaProductPillars';
@@ -13,13 +13,13 @@ export default function TeslaLandingPage() {
     window.scrollTo(0, 0);
   }, []);
 
+  const { scrollYProgress } = useScroll();
+
   return (
     <>
       {/* Custom Progress Bar */}
       <motion.div 
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
+        style={{ scaleX: scrollYProgress }}
         className="fixed top-0 left-0 right-0 h-1 bg-[#00fbfb] z-[60] origin-left"
       />
 

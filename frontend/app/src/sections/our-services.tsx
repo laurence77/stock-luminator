@@ -3,6 +3,7 @@ import { staggerContainer, fadeInUp, viewportOptions } from '../lib/animations';
 import ElectricBorder from '../components/ui/ElectricBorder';
 import ShapeGrid from '../components/ui/ShapeGrid';
 import { useTheme } from '../components/theme-provider';
+import { FloatingElement } from '../components/ui/FloatingElement';
 
 const services = [
   {
@@ -143,12 +144,13 @@ export function OurServices() {
           viewport={viewportOptions}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16"
         >
-          {services.map((service) => (
+          {services.map((service, index) => (
             <motion.div
               key={service.title}
               variants={fadeInUp}
               className="h-full"
             >
+              <FloatingElement duration={5 + (index % 3)} delay={index * 0.15} className="h-full">
               <ElectricBorder
                 color="#7c3aed"
                 speed={1}
@@ -183,6 +185,7 @@ export function OurServices() {
                   </div>
                 </div>
               </ElectricBorder>
+              </FloatingElement>
             </motion.div>
           ))}
         </motion.div>

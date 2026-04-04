@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -105,5 +107,16 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function({ addUtilities, theme }) {
+      addUtilities({
+        '.luminous-glass': {
+          backgroundColor: theme('colors.secondary.dark') + '80', // 50% opacity
+          backdropFilter: 'blur(12px)',
+          border: `1px solid ${theme('colors.primary.light')}33`, // 20% opacity
+        }
+      });
+    })
+  ],
 }
