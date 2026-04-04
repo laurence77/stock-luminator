@@ -2,8 +2,9 @@ import { motion } from 'framer-motion';
 import { fadeInUp, heroContainer } from '../../lib/animations';
 
 export default function TeslaHero() {
-  const videoUrl = `${import.meta.env.BASE_URL}sample%20/tesla/LcZygVugFcFM.com/tesla-contents/video/upload/f_auto,q_auto_best/About-Us-Hero-Desktop-Global.mp4`;
-  const fallbackImg = `${import.meta.env.BASE_URL}sample%20/tesla/rqsdbrg2ukOM.com/wp-content/uploads/2025/04/tesla-homepage-hero-1-scaled.jpg`;
+  const videoUrl = `${import.meta.env.BASE_URL}images/tesla/hero.mp4`;
+  const fallbackImg = `${import.meta.env.BASE_URL}images/tesla/hero-fallback.jpg`;
+  const logoUrl = `${import.meta.env.BASE_URL}images/tesla/logo.svg`;
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
@@ -73,6 +74,7 @@ export default function TeslaHero() {
       
       {/* Scroll indicator with SVG logo */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-4 opacity-50">
+        <img src={logoUrl} alt="Tesla" className="h-4 brightness-[0] invert mb-4" />
         <div className="w-px h-12 bg-gradient-to-b from-transparent via-[#00fbfb] to-transparent" />
         <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase font-bold">Explore Future</span>
       </div>

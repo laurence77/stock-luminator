@@ -50,14 +50,14 @@ const services = [
   {
     title: 'Bespoke Private Equity',
     description: 'Direct capital injection into Tier-1 private ventures across high-growth technology and frontier infrastructure.',
-    image: `${import.meta.env.BASE_URL}images/tesla.png`,
+    image: `${import.meta.env.BASE_URL}images/tesla/hero-fallback.jpg`,
     category: 'PRIVATE',
     slug: 'tesla'
   },
   {
     title: 'Satellite & Space Assets',
     description: 'First-mover exposure to orbital economies, launch logistics, and terrestrial-to-satellite high-frequency networks.',
-    image: `${import.meta.env.BASE_URL}images/spacex.png`,
+    image: `${import.meta.env.BASE_URL}images/tesla/spacex.svg`,
     category: 'FRONTIER',
     slug: 'spacex'
   },

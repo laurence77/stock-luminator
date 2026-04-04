@@ -5,24 +5,26 @@ const ecosystem = [
   {
     title: "V12 Full Self-Driving",
     description: "Neural network-based AI driving kernels identify predictive pattern clusters globally, moving toward Level 5 autonomy.",
-    icon: "🚗",
+    image: `${import.meta.env.BASE_URL}images/tesla/logo.svg`,
     color: "#00fbfb",
   },
   {
     title: "Optimus Robotics",
     description: "The greatest product in the history of humanity. Autonomous bipeds designed to revolutionize the global labor economy.",
-    icon: "🤖",
+    image: `${import.meta.env.BASE_URL}images/tesla/hero-fallback.jpg`, // Using fallback for now
     color: "#6305ef",
   },
   {
-    title: "Solar & Energy",
-    description: "Multi-gigawatt-hour energy storage and sustainable generation frameworks securing the future of the grid.",
-    icon: "☀️",
+    title: "SpaceX & Orbital Synergy",
+    description: "Multi-orbital logistics and heavy-lift rocket frameworks securing the first-mover advantage in the space economy.",
+    image: `${import.meta.env.BASE_URL}images/tesla/spacex.svg`,
     color: "#00fbfb",
   }
 ];
 
 export default function TeslaEcosystem() {
+  const isLogo = (idx: number) => idx === 0 || idx === 2;
+
   return (
     <section className="py-32 bg-[#1b1b20] relative">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,8 +59,20 @@ export default function TeslaEcosystem() {
               variants={fadeInUp}
               className="bg-[#131318]/50 backdrop-blur-xl border border-white/5 p-10 hover:border-[#00fbfb]/30 transition-all duration-500 group"
             >
-              <div className="text-[40px] mb-8 grayscale group-hover:grayscale-0 transition-all duration-700">
-                {item.icon}
+              <div className="h-[60px] flex items-center mb-8">
+                {isLogo(idx) ? (
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="h-10 w-auto brightness-0 invert opacity-40 group-hover:opacity-100 transition-opacity" 
+                  />
+                ) : (
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover rounded-sm grayscale group-hover:grayscale-0 transition-all duration-700" 
+                  />
+                )}
               </div>
               <h3 className="text-[20px] font-bold text-white mb-4 uppercase tracking-[-0.02em]">
                 {item.title}
