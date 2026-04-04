@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { fadeInUp, heroContainer } from '../../lib/animations';
 
 export default function TeslaHero() {
-  const videoUrl = `${import.meta.env.BASE_URL}images/tesla/hero.mp4`;
+  const videoUrl = `${import.meta.env.BASE_URL}images/tesla/About-Us-Fun-tesla-Global.mp4`;
   const fallbackImg = `${import.meta.env.BASE_URL}images/tesla/hero-fallback.jpg`;
   const logoUrl = `${import.meta.env.BASE_URL}images/tesla/logo.svg`;
 

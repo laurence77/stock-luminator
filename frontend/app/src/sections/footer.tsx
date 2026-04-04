@@ -4,6 +4,7 @@ import { Mail, MapPin } from 'lucide-react';
 const usefulLinks = [
   { name: 'Home', href: '#' },
   { name: 'About Us', href: '#about' },
+  { name: 'Our Team', href: '#team' },
   { name: 'Pricing', href: '#pricing' },
   { name: 'Services', href: '#services' },
   { name: 'Contact Us', href: '#contact' },

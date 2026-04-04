@@ -87,6 +87,7 @@ export function TradingChart() {
                 save_image={false}
                 enable_publishing={false}
                 backgroundColor={theme === 'dark' ? "rgba(19, 19, 24, 1)" : "rgba(255,255,255,1)"}
+                container_id={`tradingview_widget_${activeTab.toLowerCase()}`}
              />
           </div>
         </motion.div>

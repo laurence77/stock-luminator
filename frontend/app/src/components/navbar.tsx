@@ -32,6 +32,7 @@ function translatePage(langCode: string) {
 
 const navItems = [
   { name: 'ABOUT', href: '#about' },
+  { name: 'TEAM', href: '#team' },
   { name: 'MIRROR TRADES', href: '#mirror-trades' },
   { 
     name: 'INVESTMENT PRODUCTS', 
