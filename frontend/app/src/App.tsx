@@ -51,7 +51,7 @@ function AnimatedRoutes() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/stock-luminator">
       <CustomCursor />
       <Suspense fallback={<LoadingScreen />}>
         <AnimatedRoutes />
