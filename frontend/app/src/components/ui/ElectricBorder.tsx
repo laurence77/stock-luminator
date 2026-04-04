@@ -282,14 +282,16 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
     };
   }, [color, speed, chaos, borderRadius, octavedNoise, getRoundedRectPoint]);
 
-  const vars = {
-    '--electric-border-color': color,
-    borderRadius
-  } as CSSProperties;
-
-  // CSS variable injection via inline style is intentional — cannot be static
   return (
-    <div ref={containerRef} className={`electric-border ${className ?? ''}`} style={{ ...vars, ...style }}>
+    <div 
+      ref={containerRef} 
+      className={`electric-border ${className ?? ''}`} 
+      style={{
+        '--electric-border-color': color,
+        borderRadius: borderRadius,
+        ...style
+      } as React.CSSProperties}
+    >
       <div className="eb-canvas-container">
         <canvas ref={canvasRef} className="eb-canvas" />
       </div>

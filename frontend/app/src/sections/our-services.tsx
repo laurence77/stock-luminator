@@ -111,8 +111,7 @@ export function OurServices() {
       </div>
       {/* Background Image */}
       <div 
-        className="absolute inset-0 z-[1] bg-cover bg-center bg-no-repeat transition-opacity duration-700" 
-        style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/mirror-trading-bg.jpg')` }}
+        className="absolute inset-0 z-[1] bg-cover bg-center bg-no-repeat transition-opacity duration-700 mirrored-bg"
       >
         <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
       </div>

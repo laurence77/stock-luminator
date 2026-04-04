@@ -9,10 +9,20 @@
   background: rgba(19, 19, 24, 0.5);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
+  width: var(--base-width, 350px);
+}
+
+.carousel-container.round-container {
+  height: var(--base-width, 350px);
+  border-radius: 50%;
 }
 
 .carousel-track {
   display: flex;
+  width: var(--item-width);
+  gap: var(--track-gap);
+  perspective: 1000px;
+  perspective-origin: var(--perspective-origin);
 }
 
 .carousel-item {
@@ -28,6 +38,8 @@
   overflow: hidden;
   cursor: grab;
   transition: border-color 0.3s ease;
+  width: var(--item-width);
+  height: 100%;
 }
 
 .carousel-item:hover {
@@ -38,46 +50,23 @@
   cursor: grabbing;
 }
 
-.carousel-container.round {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.carousel-item.round {
-  background-color: #0d0716;
-  position: relative;
-  bottom: 0.1em;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.carousel-item.round-item {
+  height: var(--item-width);
+  border-radius: 50%;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.carousel-item-header.round {
-  padding: 0;
-  margin: 0;
-}
-
-.carousel-indicators-container.round {
-  position: absolute;
-  z-index: 2;
-  bottom: 3em;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.carousel-indicator.active {
-  background-color: #00fbfb;
-  box-shadow: 0 0 10px rgba(0, 251, 251, 0.5);
-}
-
-.carousel-indicator.inactive {
-  background-color: rgba(0, 251, 251, 0.1);
 }
 
 .carousel-item-header {
   margin-bottom: 16px;
   padding: 20px;
   padding-top: 20px;
+}
+
+.carousel-item-header.round {
+  padding: 0;
+  margin: 0;
 }
 
 .carousel-icon-container {
@@ -122,6 +111,14 @@
   justify-content: center;
 }
 
+.carousel-indicators-container.round-indicators {
+  position: absolute;
+  z-index: 2;
+  bottom: 3em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .carousel-indicators {
   margin-top: 24px;
   display: flex;
@@ -142,4 +139,10 @@
 .carousel-indicator.active {
   width: 12px;
   border-radius: 2px;
+  background-color: #00fbfb;
+  box-shadow: 0 0 10px rgba(0, 251, 251, 0.5);
+}
+
+.carousel-indicator.inactive {
+  background-color: rgba(255, 255, 255, 0.1);
 }

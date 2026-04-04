@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 // Use type-only imports for Framer Motion types
-import type { PanInfo, Transition } from 'framer-motion';
+import type { PanInfo, Transition, MotionValue } from 'framer-motion';
 // Use existing lucide-react icons instead of react-icons to avoid environment issues
 import { FileText, Circle, Layers, Layout, Code } from 'lucide-react';
 
@@ -63,11 +63,11 @@ interface CarouselItemProps {
   itemWidth: number;
   round?: boolean;
   trackItemOffset: number;
-  x: any; // motion value
+  x: MotionValue<number>;
   transition: Transition;
 }
 
-function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, transition }: CarouselItemProps) {
+function CarouselItem({ item, index, round, trackItemOffset, x, transition }: Omit<CarouselItemProps, 'itemWidth'>) {
   const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset];
   const outputRange = [90, 0, -90];
   const rotateY = useTransform(x, range, outputRange, { clamp: false });
@@ -75,12 +75,9 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
   return (
     <motion.div
       key={`${item?.id ?? index}-${index}`}
-      className={`carousel-item ${round ? 'round' : ''}`}
+      className={`carousel-item ${round ? 'round-item' : ''}`}
       style={{
-        width: itemWidth,
-        height: round ? itemWidth : '100%',
-        rotateY: rotateY,
-        ...(round && { borderRadius: '50%' })
+        rotateY: rotateY
       }}
       transition={transition}
     >
@@ -158,7 +155,7 @@ export default function Carousel({
 
     const timer = setInterval(() => {
       if (!isAnimating) {
-        setPosition(prev => {
+        setPosition((prev: number) => {
            const next = prev + 1;
            if (next >= itemsForRender.length) return loop ? 1 : prev;
            return next;
@@ -220,7 +217,7 @@ export default function Carousel({
 
     if (direction === 0) return;
 
-    setPosition(prev => {
+    setPosition((prev: number) => {
       const next = prev + direction;
       const max = itemsForRender.length - 1;
       return Math.max(0, Math.min(next, max));
@@ -247,21 +244,14 @@ export default function Carousel({
   return (
     <div
       ref={containerRef}
-      className={`carousel-container ${round ? 'round' : ''}`}
-      style={{
-        width: `${baseWidth}px`,
-        ...(round && { height: `${baseWidth}px`, borderRadius: '50%' })
-      }}
+      className={`carousel-container ${round ? 'round-container' : ''}`}
+      style={{ '--base-width': `${baseWidth}px` } as React.CSSProperties}
     >
       <motion.div
         className="carousel-track"
         drag={isAnimating ? false : 'x'}
         {...dragProps}
         style={{
-          width: itemWidth,
-          gap: `${GAP}px`,
-          perspective: 1000,
-          perspectiveOrigin: `${position * trackItemOffset + itemWidth / 2}px 50%`,
           x
         }}
         onDragEnd={handleDragEnd}
@@ -270,12 +260,11 @@ export default function Carousel({
         onAnimationStart={handleAnimationStart}
         onAnimationComplete={handleAnimationComplete}
       >
-        {itemsForRender.map((item, index) => (
+        {itemsForRender.map((item: CarouselItemData, index: number) => (
           <CarouselItem
             key={`${item?.id ?? index}-${index}`}
             item={item}
             index={index}
-            itemWidth={itemWidth}
             round={round}
             trackItemOffset={trackItemOffset}
             x={x}
@@ -285,9 +274,9 @@ export default function Carousel({
       </motion.div>
       
       {showIndicators && (
-        <div className={`carousel-indicators-container ${round ? 'round' : ''}`}>
+        <div className={`carousel-indicators-container ${round ? 'round-indicators' : ''}`}>
           <div className="carousel-indicators">
-            {items.map((_, index) => (
+            {items.map((_: CarouselItemData, index: number) => (
               <motion.div
                 key={index}
                 className={`carousel-indicator ${activeIndex === index ? 'active' : 'inactive'}`}
