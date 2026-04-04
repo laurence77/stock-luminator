@@ -34,12 +34,8 @@ export function ServicePage() {
 
       {/* Hero image */}
       <div 
-        className="w-full h-[340px] relative"
-        style={{ 
-          backgroundImage: `url('${service.image}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
+        className="w-full h-[340px] relative bg-cover bg-center"
+        style={{ backgroundImage: `url('${service.image}')` }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <h1 className="absolute bottom-8 left-8 text-white text-[36px] font-bold tracking-widest uppercase">

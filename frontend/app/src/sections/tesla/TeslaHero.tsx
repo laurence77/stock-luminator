@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { fadeInUp, heroContainer } from '../../lib/animations';
-import { FloatingElement } from '../../components/ui/FloatingElement';
+import { fadeInUp, heroContainer } from '@/lib/animations';
+import { FloatingElement } from '@/components/ui/FloatingElement';
 import TeslaLogo from '../../../public/images/tesla/logo.svg?react';
 
 export default function TeslaHero() {

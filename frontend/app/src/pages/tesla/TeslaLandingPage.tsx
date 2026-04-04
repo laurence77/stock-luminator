@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion, useScroll } from 'framer-motion';
-import { fadeInUp, staggerContainer, viewportOptions } from '../../lib/animations';
+import { fadeInUp, staggerContainer, viewportOptions } from '@/lib/animations';
+import { PageTransition } from '@/components/layout/PageTransition';
 import TeslaHero from '../../sections/tesla/TeslaHero';
 import TeslaProductPillars from '../../sections/tesla/TeslaProductPillars';
 import TeslaStats from '../../sections/tesla/TeslaStats';
@@ -16,7 +17,7 @@ export default function TeslaLandingPage() {
   const { scrollYProgress } = useScroll();
 
   return (
-    <>
+    <PageTransition>
       {/* Custom Progress Bar */}
       <motion.div 
         style={{ scaleX: scrollYProgress }}
@@ -94,6 +95,6 @@ export default function TeslaLandingPage() {
            </p>
         </div>
       </footer>
-    </>
+    </PageTransition>
   );
 }
