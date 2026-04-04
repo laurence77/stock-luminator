@@ -95,9 +95,14 @@ function PillarSection({ pillar }: { pillar: typeof pillars[0] }) {
             </div>
 
             <div className="pt-10">
-              <button className="bg-white/5 hover:bg-[#00fbfb] text-white hover:text-[#131318] border border-white/10 px-8 py-4 text-[13px] font-bold tracking-[0.1em] uppercase transition-all backdrop-blur-xl">
+              <a 
+                href={pillar.title === "Intelligent Mobility" ? "https://www.tesla.com/AI" : pillar.title === "General Purpose Robotics" ? "https://www.tesla.com/optimus" : "https://www.tesla.com/models"} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="bg-white/5 hover:bg-[#00fbfb] text-white hover:text-[#131318] border border-white/10 px-8 py-4 text-[13px] font-bold tracking-[0.1em] uppercase transition-all backdrop-blur-xl inline-block text-center"
+              >
                 {pillar.cta}
-              </button>
+              </a>
             </div>
           </motion.div>
         </motion.div>

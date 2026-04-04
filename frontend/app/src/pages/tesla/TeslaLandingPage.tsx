@@ -75,10 +75,10 @@ export default function TeslaLandingPage() {
                   variants={fadeInUp}
                   className="flex flex-col md:flex-row gap-6 justify-center items-center"
                 >
-                   <button className="bg-[#00fbfb] hover:bg-[#6305ef] text-[#131318] hover:text-white px-12 py-5 text-[15px] font-bold tracking-[0.1em] uppercase transition-all shadow-2xl shadow-[#00fbfb]/20">
+                   <a href={`${import.meta.env.BASE_URL}#signup`} className="bg-[#00fbfb] hover:bg-[#6305ef] text-[#131318] hover:text-white px-12 py-5 text-[15px] font-bold tracking-[0.1em] uppercase transition-all shadow-2xl shadow-[#00fbfb]/20 inline-block text-center">
                       Invest in Tesla Now
-                   </button>
-                   <a href={`${import.meta.env.BASE_URL}#services`} className="text-white/60 hover:text-white text-[13px] font-bold tracking-[0.2em] uppercase transition-colors">
+                   </a>
+                   <a href={`${import.meta.env.BASE_URL}#services`} className="text-white/60 font-bold hover:text-white text-[13px] tracking-[0.2em] uppercase transition-colors">
                       Back to All Services
                    </a>
                 </motion.div>

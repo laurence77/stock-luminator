@@ -61,13 +61,13 @@ export default function TeslaHero() {
             variants={fadeInUp}
             className="flex flex-wrap gap-4"
           >
-            <button className="bg-[#00fbfb] hover:bg-[#6305ef] text-[#131318] hover:text-white px-10 py-4 text-[14px] font-bold tracking-[0.05em] uppercase transition-all shadow-lg shadow-[#00fbfb]/10 group">
+            <a href={`${import.meta.env.BASE_URL}#signup`} className="bg-[#00fbfb] hover:bg-[#6305ef] text-[#131318] hover:text-white px-10 py-4 text-[14px] font-bold tracking-[0.05em] uppercase transition-all shadow-lg shadow-[#00fbfb]/10 group inline-block text-center">
               Execute Investment
               <span className="inline-block transition-transform group-hover:translate-x-1 ml-2">→</span>
-            </button>
-            <button className="bg-transparent border border-white/20 text-white hover:bg-white/10 px-10 py-4 text-[14px] font-bold tracking-[0.05em] uppercase transition-all backdrop-blur-sm">
+            </a>
+            <a href="https://ir.tesla.com" target="_blank" rel="noopener noreferrer" className="bg-transparent border border-white/20 text-white hover:bg-white/10 px-10 py-4 text-[14px] font-bold tracking-[0.05em] uppercase transition-all backdrop-blur-sm inline-block text-center">
               View Shareholder Presentation
-            </button>
+            </a>
           </motion.div>
         </motion.div>
       </div>
