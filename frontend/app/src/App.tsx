@@ -16,6 +16,7 @@ const SignUp = lazy(() => import('@/pages/SignUp').then(m => ({ default: m.SignU
 const Markets = lazy(() => import('@/pages/Markets').then(m => ({ default: m.Markets })));
 const ServicePage = lazy(() => import('@/pages/ServicePage').then(m => ({ default: m.ServicePage })));
 const TeslaLandingPage = lazy(() => import('@/pages/tesla/TeslaLandingPage'));
+const SpaceXLandingPage = lazy(() => import('@/pages/spacex/SpaceXLandingPage'));
 const OurTeam = lazy(() => import('@/pages/team/OurTeam'));
 
 // AnimatePresence requires location from inside BrowserRouter
@@ -39,6 +40,7 @@ function AnimatedRoutes() {
         {/* Deep Dive Services Layout */}
         <Route path="/services" element={<ServiceLayout />}>
           <Route path="tesla" element={<TeslaLandingPage />} />
+          <Route path="spacex" element={<SpaceXLandingPage />} />
           <Route path=":serviceId" element={<ServicePage />} />
         </Route>
 
