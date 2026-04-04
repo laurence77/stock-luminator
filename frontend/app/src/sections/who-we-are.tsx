@@ -57,13 +57,17 @@ export function WhoWeAre() {
             viewport={viewportOptions}
             className="relative"
           >
-            <div className="w-full h-[500px] border-gray-100">
-              <img
-                src={`${import.meta.env.BASE_URL}images/who-we-are.jpg`}
-                alt="Business professionals collaborating"
-                loading="lazy"
+            <div className="w-full h-[500px] overflow-hidden border border-gray-100 dark:border-white/10 relative">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="w-full h-full object-cover"
-              />
+              >
+                <source src={`${import.meta.env.BASE_URL}images/tesla/About-Us-Fun-tesla-Global.mp4`} type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
             </div>
           </motion.div>
         </div>
