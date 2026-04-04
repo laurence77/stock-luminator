@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Mail, MapPin } from 'lucide-react';
 
 const usefulLinks = [
@@ -11,10 +12,12 @@ const usefulLinks = [
 ];
 
 const serviceLinks = [
-  'Stock Market',
-  'Foreign Exchange',
-  'Option Trading',
-  'Portfolio Management',
+  { name: 'Tesla Ecosystem', href: '/services/tesla' },
+  { name: 'SpaceX Assets', href: '/services/spacex' },
+  { name: 'Options Trading', href: '/services/options-copy-trading' },
+  { name: 'Forex Trading', href: '/services/forex' },
+  { name: 'Crypto Assets', href: '/services/crypto' },
+  { name: 'Physical Gold', href: '/services/gold' },
 ];
 
 export function Footer() {
@@ -61,13 +64,13 @@ export function Footer() {
             <h4 className="text-[16px] font-extrabold bg-gradient-to-r from-gray-900 via-[#7c3aed] to-gray-900 dark:from-white dark:via-[#a78bfa] dark:to-white bg-clip-text text-transparent uppercase tracking-[-0.02em]st mb-8">Our Services</h4>
             <ul className="space-y-4">
               {serviceLinks.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
                     className="text-gray-500 dark:text-gray-400 text-[15px] hover:text-[#1e40af] dark:hover:text-[#60a5fa] font-light transition-colors"
                   >
-                    {link}
-                  </a>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>

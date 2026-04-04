@@ -271,21 +271,58 @@ export function Navbar() {
               <div className="flex justify-end p-2 mb-2">
                 <button
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className="p-2  hover:bg-gray-100 dark:hover:bg-white/10 transition-colors flex items-center gap-2"
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors flex items-center gap-2"
                 >
                   <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Toggle Theme</span>
                   {theme === 'dark' ? <Sun className="w-5 h-5 text-gray-300" /> : <Moon className="w-5 h-5 text-gray-600" />}
                 </button>
               </div>
               {navItems.map((item) => (
-                <div key={item.name}>
-                  <Link
-                    to={item.href}
-                    className="block px-4 py-3 text-sm font-semibold text-gray-800 dark:text-gray-200 hover:text-[#7c3aed] hover:bg-gray-50 dark:hover:bg-white/5 "
-                    onClick={() => !item.dropdown && setIsMobileMenuOpen(false)}
+                <div key={item.name} className="border-b border-gray-50 dark:border-white/5 last:border-0">
+                  <div 
+                    className="flex items-center justify-between px-4 py-3 cursor-pointer"
+                    onClick={() => {
+                      if (item.dropdown) {
+                        setActiveDropdown(activeDropdown === item.name ? null : item.name);
+                      } else {
+                        setIsMobileMenuOpen(false);
+                        window.location.href = item.href;
+                      }
+                    }}
                   >
-                    {item.name}
-                  </Link>
+                    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                      {item.name}
+                    </span>
+                    {item.dropdown && (
+                      <svg 
+                        className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === item.name ? 'rotate-180' : ''}`} 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    )}
+                  </div>
+                  
+                  {item.dropdown && activeDropdown === item.name && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      className="bg-gray-50 dark:bg-white/5 px-6 py-2 pb-4 space-y-3"
+                    >
+                      {item.dropdown.map((subItem) => (
+                        <Link
+                          key={subItem.label}
+                          to={subItem.href}
+                          className="block text-[13px] text-gray-600 dark:text-gray-400 hover:text-[#7c3aed]"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {subItem.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
                 </div>
               ))}
               <div className="pt-4 space-y-4">
