@@ -6,76 +6,88 @@ import { useTheme } from '../components/theme-provider';
 
 const services = [
   {
-    image: '/images/forex.jpg',
-    title: 'FOREIGN EXCHANGE',
-    slug: 'forex',
-    description: 'Access deep liquidity and seamless execution across 80+ currency pairs. Our institutional-grade FX platform provides ultra-low latency trading, advanced charting, and competitive spreads.',
+    title: 'Precision FX Strategies',
+    description: 'Capitalize on intraday liquidity cycles and non-correlated currency volatility with our institutional FX-alpha frameworks.',
+    image: `${import.meta.env.BASE_URL}images/forex.jpg`,
+    category: 'TRADING',
+    slug: 'forex'
   },
   {
-    image: '/images/research-building.jpg',
-    title: 'REAL ESTATE',
-    slug: 'real-estate',
-    description: "Diversify your portfolio with premium, income-generating properties. Gain access to private real estate funds and global REITs targeting high-yield commercial and residential markets.",
+    title: 'Research & Global Macro',
+    description: 'Proprietary intelligence identifying structural macroeconomic shifts before they manifest in benchmark indices.',
+    image: `${import.meta.env.BASE_URL}images/research-building.jpg`,
+    category: 'ANALYSIS',
+    slug: 'real-estate'
   },
   {
-    image: '/images/infrastructure.jpg',
-    title: 'INFRASTRUCTURE',
-    slug: 'infrastructure',
-    description: "Invest in the backbone of global commerce. We offer targeted exposure to critical infrastructure assets, including renewable energy grids, transport logistics, and telecommunications networks.",
+    title: 'Algorithmic Infrastructure',
+    description: 'Low-latency execution engines designed to eliminate slippage and maximize capture of arbitrage catalysts.',
+    image: `${import.meta.env.BASE_URL}images/infrastructure.jpg`,
+    category: 'TECHNOLOGY',
+    slug: 'infrastructure'
   },
   {
-    image: '/images/fixed-income.jpg',
-    title: 'FIXED INCOME',
-    slug: 'fixed-income',
-    description: "Secure stable, long-term returns with our comprehensive fixed-income solutions. From sovereign wealth bonds to high-yield corporate debt, our expert market intelligence guides capital preservation.",
+    title: 'Fixed Income & Bond Markets',
+    description: 'Diversified yield-optimization through global sovereign debt and high-grade corporate credit obligations.',
+    image: `${import.meta.env.BASE_URL}images/fixed-income.jpg`,
+    category: 'STABILITY',
+    slug: 'fixed-income'
   },
   {
-    image: '/images/stock.jpg',
-    title: 'STOCK',
-    slug: 'stock',
-    description: 'Trade high-conviction equities across all major global exchanges. Leverage our AI-powered sentiment analysis and institutional-grade order routing to capitalize on market volatility.',
+    title: 'Bespoke Stock Selection',
+    description: 'Aggressive equity portfolios constructed from high-conviction catalysts and structural market inefficiencies.',
+    image: `${import.meta.env.BASE_URL}images/stock.jpg`,
+    category: 'GROWTH',
+    slug: 'stock'
   },
   {
-    image: '/images/options-copy.jpg',
-    title: 'OPTIONS COPY TRADING',
-    slug: 'options-copy-trading',
-    description: 'Mirror the exact strategies of elite, verified options traders. Bypass pattern day trader (PDT) restrictions and automate your options portfolio with our proprietary low-latency copy engine.',
+    title: 'Options & Complex Derivatives',
+    description: 'Strategic volatility hedging and asymmetric payoff structures engineered for sophisticated net worth protection.',
+    image: `${import.meta.env.BASE_URL}images/options-copy.jpg`,
+    category: 'HEDGING',
+    slug: 'options-copy-trading'
   },
   {
-    image: '/images/tesla.png',
-    title: 'TESLA',
-    slug: 'tesla',
-    description: 'Invest in the future of sustainable energy and autonomous robotics. Our managed Tesla portfolios offer high-growth exposure to the undisputed leader in the electric vehicle revolution.',
+    title: 'Bespoke Private Equity',
+    description: 'Direct capital injection into Tier-1 private ventures across high-growth technology and frontier infrastructure.',
+    image: `${import.meta.env.BASE_URL}images/tesla.png`,
+    category: 'PRIVATE',
+    slug: 'tesla'
   },
   {
-    image: '/images/spacex.png',
-    title: 'SPACE X',
-    slug: 'spacex',
-    description: 'Access exclusive private commercial spaceflight opportunities. We provide institutional clients with fractional investment vehicles targeting SpaceX and the exponentially growing orbital economy.',
+    title: 'Satellite & Space Assets',
+    description: 'First-mover exposure to orbital economies, launch logistics, and terrestrial-to-satellite high-frequency networks.',
+    image: `${import.meta.env.BASE_URL}images/spacex.png`,
+    category: 'FRONTIER',
+    slug: 'spacex'
   },
   {
-    image: '/images/gold.png',
-    title: 'GOLD',
-    slug: 'gold',
-    description: 'Hedge against inflation and macroeconomic volatility. We offer both physical bullion custody and liquid gold-backed securities as a time-tested safe haven for portfolio diversification.',
+    title: 'Physical Gold & Bullion',
+    description: 'Institutional-grade custody of allocated physical reserves, serving as the ultimate hedge against monetary debasement.',
+    image: `${import.meta.env.BASE_URL}images/gold.png`,
+    category: 'RESERVE',
+    slug: 'gold'
   },
   {
-    image: '/images/agriculture.png',
-    title: 'AGRICULTURE',
-    slug: 'agriculture',
-    description: 'Capitalize on the growing global demand for food security. Invest strategically in advanced ag-tech innovations, arable farmland, and sustainable sovereign supply chains.',
+    title: 'Strategic Commodities',
+    description: 'Dynamic exposure to soft agriculture, energy catalysts, and industrial metals via multi-leg derivative vehicles.',
+    image: `${import.meta.env.BASE_URL}images/agriculture.png`,
+    category: 'TANGIBLE',
+    slug: 'agriculture'
   },
   {
-    image: '/images/crypto.png',
-    title: 'CRYPTO ASSETS',
-    slug: 'crypto',
-    description: 'Enter the decentralized economy with absolute confidence. We offer fully regulated digital asset trading, cold-storage custody, and diversified blockchain index funds.',
+    title: 'Digital Asset Ecosystems',
+    description: 'Institutional access to decentralised liquidity, non-custodial yield pools, and high-frequency crypto-alpha.',
+    image: `${import.meta.env.BASE_URL}images/crypto.png`,
+    category: 'DIGITAL',
+    slug: 'crypto'
   },
   {
-    image: '/images/ai.png',
-    title: 'AI INFRASTRUCTURE',
-    slug: 'ai-infrastructure',
-    description: 'Gain direct exposure to the computing revolution. Our AI fund targets the physical layer—data centres, semiconductor foundries, and high-performance networking powering next-gen AI.',
+    title: 'AI & Neural Systems',
+    description: 'Algorithmic trading kernels driven by real-time neural networks identifying predictive pattern clusters globally.',
+    image: `${import.meta.env.BASE_URL}images/ai.png`,
+    category: 'QUANT',
+    slug: 'ai-infrastructure'
   },
 ];
 
@@ -96,6 +108,13 @@ export function OurServices() {
           shape="circle"
           hoverTrailAmount={0}
         />
+      </div>
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-[1] bg-cover bg-center bg-no-repeat transition-opacity duration-700" 
+        style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/mirror-trading-bg.jpg')` }}
+      >
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
       </div>
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">

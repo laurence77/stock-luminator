@@ -15,8 +15,12 @@ export function MirrorTrading() {
         />
       </div>
       {/* Background image layer above grid, below content */}
-      <div className="absolute inset-0 z-[1] bg-cover bg-center bg-no-repeat bg-[url('${import.meta.env.BASE_URL}images/mirror-trading-bg.jpg')]">
-        <div className="absolute inset-0 bg-black/80" />
+      {/* Background image layer with dynamic pathing */}
+      <div 
+        className="absolute inset-0 z-[1] bg-cover bg-center bg-no-repeat transition-opacity duration-700"
+        style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/mirror-trading-bg.jpg')` }}
+      >
+        <div className="absolute inset-0 bg-black/80 backdrop-blur-[1px]" />
       </div>
 
       {/* Content */}

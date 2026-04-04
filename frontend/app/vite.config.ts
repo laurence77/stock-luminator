@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/stock-luminator/' : '/',
+  base: '/stock-luminator/',
   plugins: [
     inspectAttr(),
     react(),

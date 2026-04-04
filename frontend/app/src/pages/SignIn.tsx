@@ -20,10 +20,17 @@ export function SignIn() {
 
   return (
     <div className="min-h-screen flex bg-brand-surface font-sans">
-      {/* Left Panel - Image/Brand */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-black items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-40"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/80 to-brand-purple/80 mix-blend-multiply"></div>
+      {/* Left Panel - Image/Brand with dynamic pathing */}
+      <div 
+        className="hidden lg:flex lg:w-1/2 relative bg-black items-center justify-center overflow-hidden"
+        style={{ 
+          backgroundImage: `url('${import.meta.env.BASE_URL}images/stock.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="absolute inset-0 bg-[#131118]/40 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/80 to-brand-dark/90 mix-blend-multiply"></div>
         
         <div className="relative z-10 px-16 text-center">
           <motion.h2 

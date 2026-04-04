@@ -3,7 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 const services: Record<string, { title: string; image: string; description: string; details: string[] }> = {
   forex: {
     title: 'Foreign Exchange',
-    image: '/images/forex.jpg',
+    image: `${import.meta.env.BASE_URL}images/forex.jpg`,
     description: 'Stock Market Luminator finance offers a broad array of professional services and access to the global foreign exchange markets for commercial and institutional clients.',
     details: [
       'Access to major, minor and exotic currency pairs',
@@ -15,7 +15,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   'real-estate': {
     title: 'Real Estate',
-    image: '/images/research-building.jpg',
+    image: `${import.meta.env.BASE_URL}images/research-building.jpg`,
     description: "As one of the world's largest investors in real estate, we own and operate iconic properties in the world's most dynamic markets.",
     details: [
       'Exposure to commercial and residential property',
@@ -27,7 +27,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   infrastructure: {
     title: 'Infrastructure',
-    image: '/images/infrastructure.jpg',
+    image: `${import.meta.env.BASE_URL}images/infrastructure.jpg`,
     description: "We are one of the world's largest infrastructure investors, owning and operating assets across the utilities, transport and energy sectors.",
     details: [
       'Investment in toll roads, airports and utilities',
@@ -39,7 +39,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   'fixed-income': {
     title: 'Fixed Income',
-    image: '/images/fixed-income.jpg',
+    image: `${import.meta.env.BASE_URL}images/fixed-income.jpg`,
     description: "We meet our investor's needs by offering a broad fixed income solution set and targeted global market intelligence.",
     details: [
       'Government and corporate bond portfolios',
@@ -51,7 +51,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   stock: {
     title: 'Stock',
-    image: '/images/stock.jpg',
+    image: `${import.meta.env.BASE_URL}images/stock.jpg`,
     description: 'Stock trading involves buying and selling shares in companies in an effort to make money on daily changes in price.',
     details: [
       'Access to 50+ global stock exchanges',
@@ -63,7 +63,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   'options-copy-trading': {
     title: 'Options Copy Trading',
-    image: '/images/options-copy.jpg',
+    image: `${import.meta.env.BASE_URL}images/options-copy.jpg`,
     description: 'With over 500+ registered and regulated traders on Stock Market Luminator, you get the liberty to beat the PDT rule and day trading requirements.',
     details: [
       'Copy top-performing options traders automatically',
@@ -75,7 +75,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   tesla: {
     title: 'Tesla Investment',
-    image: '/images/tesla.png',
+    image: `${import.meta.env.BASE_URL}images/tesla.png`,
     description: 'Invest in the future of sustainable energy and autonomous transportation. Our managed Tesla portfolios offer high-growth exposure to the leading force in the electric vehicle revolution.',
     details: [
       'Direct and indirect Tesla equity exposure',
@@ -87,7 +87,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   spacex: {
     title: 'Space X',
-    image: '/images/spacex.png',
+    image: `${import.meta.env.BASE_URL}images/spacex.png`,
     description: 'Access exclusive private equity opportunities in the aerospace industry targeting SpaceX and the broader space economy.',
     details: [
       'Private equity access to pre-IPO SpaceX exposure',
@@ -99,7 +99,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   gold: {
     title: 'Gold',
-    image: '/images/gold.png',
+    image: `${import.meta.env.BASE_URL}images/gold.png`,
     description: 'Hedge against inflation and market volatility with physical gold and gold-backed securities. A time-tested safe haven asset.',
     details: [
       'Allocated and unallocated physical gold',
@@ -111,7 +111,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   agriculture: {
     title: 'Agriculture',
-    image: '/images/agriculture.png',
+    image: `${import.meta.env.BASE_URL}images/agriculture.png`,
     description: 'Capitalize on the growing global demand for food security. We offer strategic investments in advanced agricultural technologies and farmland.',
     details: [
       'Global farmland and timberland investment',
@@ -123,7 +123,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   crypto: {
     title: 'Crypto Assets',
-    image: '/images/crypto.png',
+    image: `${import.meta.env.BASE_URL}images/crypto.png`,
     description: 'Enter the digital asset economy with confidence. We offer fully regulated cryptocurrency trading, secure cold-storage custody and diversified blockchain index funds.',
     details: [
       'Regulated spot trading for BTC, ETH and 50+ alts',
@@ -135,7 +135,7 @@ const services: Record<string, { title: string; image: string; description: stri
   },
   'ai-infrastructure': {
     title: 'AI Infrastructure',
-    image: '/images/ai.png',
+    image: `${import.meta.env.BASE_URL}images/ai.png`,
     description: 'Gain exposure to the backbone of the AI revolution — data centres, cloud computing, semiconductor fabs, and high-performance networking.',
     details: [
       'Data centre REIT and operator exposure',
@@ -177,12 +177,14 @@ export function ServicePage() {
       </div>
 
       {/* Hero image */}
-      <div className="w-full h-[340px] overflow-hidden relative">
-        <img
-          src={service.image}
-          alt={service.title}
-          className="w-full h-full object-cover"
-        />
+      <div 
+        className="w-full h-[340px] relative"
+        style={{ 
+          backgroundImage: `url('${service.image}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <h1 className="absolute bottom-8 left-8 text-white text-[36px] font-bold tracking-widest uppercase">
           {service.title}
