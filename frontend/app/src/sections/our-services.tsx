@@ -48,10 +48,10 @@ const services = [
     slug: 'options-copy-trading'
   },
   {
-    title: 'Bespoke Private Equity',
-    description: 'Direct capital injection into Tier-1 private ventures across high-growth technology and frontier infrastructure.',
-    image: `${import.meta.env.BASE_URL}images/tesla/hero-fallback.jpg`,
-    category: 'PRIVATE',
+    title: 'Tesla Ecosystem',
+    description: 'Strategic allocation into the world’s most advanced AI and energy infrastructure. Capture the multi-trillion dollar shift toward autonomous transport and sustainable robotics.',
+    image: `${import.meta.env.BASE_URL}images/tesla.png`,
+    category: 'ALPHAGROWTH',
     slug: 'tesla'
   },
   {
