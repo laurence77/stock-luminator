@@ -56,10 +56,10 @@ export function HeroSection() {
               >
                 SIGN IN
               </a>
-              <a href="#signup"
-                className="bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)] text-white hover:bg-[#6305ef] px-8 py-3 text-[14px] font-bold tracking-[-0.04em] transition-colors inline-block text-center"
+              <a href="#services"
+                className="bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)] text-white hover:bg-[#7c3aed] px-8 py-3 text-[14px] font-bold tracking-[-0.04em] transition-colors inline-block text-center"
               >
-                SIGN UP
+                EXPLORE SERVICES
               </a>
             </motion.div>
           </motion.div>

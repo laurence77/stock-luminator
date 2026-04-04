@@ -42,13 +42,16 @@ const navItems = [
     dropdown: [
       { label: 'Option Trading', href: '/services/options-copy-trading' },
       { label: 'Tesla Ecosystem', href: '/services/tesla' },
+      { label: 'Satellite & Space', href: '/services/spacex' },
       { label: 'Real Estate', href: '/services/real-estate' },
       { label: 'Stocks', href: '/services/stock' },
       { label: 'Infrastructure', href: '/services/infrastructure' },
       { label: 'Forex Trading', href: '/services/forex' },
       { label: 'Crypto Asset', href: '/services/crypto' },
       { label: 'Fixed Income', href: '/services/fixed-income' },
-      { label: 'Agriculture', href: '/services/agriculture' }
+      { label: 'Agriculture', href: '/services/agriculture' },
+      { label: 'Physical Gold', href: '/services/gold' },
+      { label: 'AI Neural Systems', href: '/services/ai-infrastructure' }
     ]
   },
   { 

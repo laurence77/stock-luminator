@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { staggerContainer, fadeInUp, viewportOptions } from '../lib/animations';
 import ElectricBorder from '../components/ui/ElectricBorder';
 import ShapeGrid from '../components/ui/ShapeGrid';
@@ -175,13 +176,13 @@ export function OurServices() {
                     {service.description}
                   </p>
                   <div className="w-full mt-auto">
-                    <a
-                      href={`#service-${service.slug}`}
+                    <Link
+                      to={`/services/${service.slug}`}
                       aria-label={`Explore ${service.title}`}
                       className="inline-block w-full py-3 px-4 bg-brand-purple text-white text-[14px] font-bold tracking-wider text-center uppercase rounded hover:bg-opacity-90 transition-all shadow-md hover:shadow-lg hover:-translate-y-[1px]"
                     >
                       Explore Service
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </ElectricBorder>
