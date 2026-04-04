@@ -157,12 +157,12 @@ export function OurServices() {
                 
                 className="bg-[#fcfcfc] dark:bg-[#1b1b20] overflow-hidden group h-full flex flex-col"
               >
-                <div className={`overflow-hidden h-[240px] relative shrink-0 transform-gpu ${service.slug === 'tesla' ? 'bg-[#fcfcfc] dark:bg-[#1b1b20] flex items-center justify-center p-8' : ''}`}>
+                <div className={`overflow-hidden h-[240px] relative shrink-0 transform-gpu ${service.slug === 'tesla' ? 'bg-[#fcfcfc] dark:bg-[#1b1b20] flex items-center justify-center p-16' : ''}`}>
                   <img
                     src={service.image}
                     alt={service.title}
                     loading="lazy"
-                    className={`w-full h-full ${service.slug === 'tesla' ? 'object-contain' : 'object-cover'}`}
+                    className={`w-full h-full ${service.slug === 'tesla' ? 'object-contain max-h-[100px]' : 'object-cover'}`}
                   />
                   <div className="absolute inset-0 bg-white/10 dark:bg-black/30 group-hover:bg-transparent dark:group-hover:bg-transparent transition-colors duration-500 " />
                 </div>
