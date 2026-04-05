@@ -51,7 +51,24 @@
 
 @layer utilities {
   .text-balance {
+    text-wrap: wrap;
     text-wrap: balance;
+  }
+  .bg-dot-grid {
+    background-image: radial-gradient(circle at 1px 1px, var(--grid-color, rgba(255,255,255,0.1)) 1px, transparent 0);
+    background-size: var(--grid-size, 40px) var(--grid-size, 40px);
+  }
+  .bg-line-grid {
+    background-image: linear-gradient(var(--grid-color, rgba(255,255,255,0.1)) 1px, transparent 1px), 
+                      linear-gradient(90deg, var(--grid-color, rgba(255,255,255,0.1)) 1px, transparent 1px);
+    background-size: var(--grid-size, 40px) var(--grid-size, 40px);
+  }
+  .hero-bg {
+    background-image: url('/images/hero-bg.jpg');
+  }
+  .liquidity-grid {
+    background-image: linear-gradient(#14f195 1px, transparent 1px), linear-gradient(90deg, #14f195 1px, transparent 1px);
+    background-size: 30px 30px;
   }
 }
 

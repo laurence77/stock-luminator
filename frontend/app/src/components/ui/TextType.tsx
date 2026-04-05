@@ -178,7 +178,7 @@ const TextType = ({
       className: `text-type ${className}`,
       ...props
     },
-    <span className="text-type__content" style={{ color: getCurrentTextColor() || 'inherit' }}>
+    <span className={`text-type__content [color:${getCurrentTextColor() || 'inherit'}]`}>
       {displayedText}
     </span>,
     showCursor && (

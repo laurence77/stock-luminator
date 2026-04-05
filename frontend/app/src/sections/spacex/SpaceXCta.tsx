@@ -11,7 +11,7 @@ export default function SpaceXCta() {
   return (
     <section className="py-40 bg-[#050505] relative overflow-hidden border-t border-white/5">
       {/* Cinematic Thruster Glow / Earth Horizon */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%]" style={{ height: '30vh' }}>
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[30vh]">
         <div className="absolute inset-0 bg-gradient-to-t from-[#f97316]/20 via-[#f97316]/5 to-transparent blur-[120px] translate-y-1/2" />
       </div>
 

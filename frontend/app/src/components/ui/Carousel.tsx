@@ -249,12 +249,7 @@ export default function Carousel({
   return (
     <div
       ref={containerRef}
-      className={`carousel-container ${round ? 'round-container' : ''}`}
-      style={{ 
-        '--base-width': `${baseWidth}px`,
-        '--item-width': `${itemWidth}px`,
-        '--track-gap': `${GAP}px`
-      } as React.CSSProperties}
+      className={`carousel-container ${round ? 'round-container' : ''} [--base-width:${baseWidth}px] [--item-width:${itemWidth}px] [--track-gap:${GAP}px]`}
     >
       <motion.div
         className="carousel-track"

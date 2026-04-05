@@ -30,8 +30,7 @@ export default function SpaceXProductPillars() {
       {/* Background Grid Accent */}
       <div className="absolute inset-0 z-0 opacity-10">
         <div 
-          className="absolute inset-0" 
-          style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)' }} 
+          className="absolute inset-0 bg-dot-grid [--grid-color:rgba(255,255,255,0.1)] [--grid-size:30px]" 
         />
       </div>
 

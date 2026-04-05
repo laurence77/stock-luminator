@@ -17,6 +17,10 @@ const Markets = lazy(() => import('@/pages/Markets').then(m => ({ default: m.Mar
 const ServicePage = lazy(() => import('@/pages/ServicePage').then(m => ({ default: m.ServicePage })));
 const TeslaLandingPage = lazy(() => import('@/pages/tesla/TeslaLandingPage'));
 const SpaceXLandingPage = lazy(() => import('@/pages/spacex/SpaceXLandingPage'));
+const AISystemsLandingPage = lazy(() => import('@/pages/ai-systems/AISystemsLandingPage'));
+const DigitalAssetsLandingPage = lazy(() => import('@/pages/digital-assets/DigitalAssetsLandingPage'));
+const MirrorTradingLandingPage = lazy(() => import('@/pages/mirror-trading/MirrorTradingLandingPage'));
+const RealEstateLandingPage = lazy(() => import('@/pages/real-estate/RealEstateLandingPage'));
 const OurTeam = lazy(() => import('@/pages/team/OurTeam'));
 
 // AnimatePresence requires location from inside BrowserRouter
@@ -41,6 +45,10 @@ function AnimatedRoutes() {
         <Route path="/services" element={<ServiceLayout />}>
           <Route path="tesla" element={<TeslaLandingPage />} />
           <Route path="spacex" element={<SpaceXLandingPage />} />
+          <Route path="ai-systems" element={<AISystemsLandingPage />} />
+          <Route path="digital-assets" element={<DigitalAssetsLandingPage />} />
+          <Route path="mirror-trading" element={<MirrorTradingLandingPage />} />
+          <Route path="real-estate" element={<RealEstateLandingPage />} />
           <Route path=":serviceId" element={<ServicePage />} />
         </Route>
 

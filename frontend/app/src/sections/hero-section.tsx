@@ -7,11 +7,11 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center pt-[88px]">
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
-        style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/hero-bg.jpg')` }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 hero-bg"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
       </div>
+
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">

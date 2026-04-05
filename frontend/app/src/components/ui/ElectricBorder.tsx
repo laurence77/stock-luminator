@@ -285,12 +285,8 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
   return (
     <div 
       ref={containerRef} 
-      className={`electric-border ${className ?? ''}`} 
-      style={{
-        '--electric-border-color': color,
-        borderRadius: borderRadius,
-        ...style
-      } as React.CSSProperties}
+      className={`electric-border ${className ?? ''} [--electric-border-color:${color}] [border-radius:${borderRadius}px]`} 
+      style={style}
     >
       <div className="eb-canvas-container">
         <canvas ref={canvasRef} className="eb-canvas" />
