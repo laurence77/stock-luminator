@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react';
-import { PageTransition } from '@/components/animations/PageTransition';
-import Navbar from '@/components/navbar';
-import Footer from '@/sections/footer';
+import { PageTransition } from '@/components/layout/PageTransition';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/sections/footer';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
 import { AllocationCalculator } from '@/components/calculator/AllocationCalculator';
 import { motion } from 'framer-motion';
-import { fadeInUp, viewportOptions } from '@/lib/animations';
+import { viewportOptions } from '@/lib/animations';
 
 // Lazy load sections for the Digital Asset Ecosystem Suite
 const DigitalAssetsHero = lazy(() => import('@/sections/digital-assets/DigitalAssetsHero'));

@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
-import { PageTransition } from '@/components/animations/PageTransition';
-import Navbar from '@/components/navbar';
-import Footer from '@/sections/footer';
+import { PageTransition } from '@/components/layout/PageTransition';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/sections/footer';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
 
 // Lazy load sections for the AI & Neural Systems Suite
