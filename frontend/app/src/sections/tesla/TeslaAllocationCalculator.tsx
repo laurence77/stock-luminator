@@ -57,10 +57,8 @@ const TeslaAllocationCalculator = () => {
                                         max="100" 
                                         value={cybercab} 
                                         onChange={(e) => setCybercab(parseInt(e.target.value))}
-                                        className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00fbfb] hover:accent-[#00fbfb]/80 transition-all"
-                                        style={{
-                                            background: `linear-gradient(to right, #00fbfb ${cybercab}%, rgba(255, 255, 255, 0.1) ${cybercab}%)`
-                                        }}
+                                        className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00fbfb] hover:accent-[#00fbfb]/80 transition-all bg-[linear-gradient(to_right,#00fbfb_var(--range-progress),rgba(255,255,255,0.1)_var(--range-progress))]"
+                                        style={{ "--range-progress": `${cybercab}%` } as React.CSSProperties}
                                         title="Cybercab Deployment Percentage"
                                     />
                                     <div className="flex justify-between text-[10px] text-white/20 uppercase tracking-[0.2em] font-bold mt-4">
@@ -91,10 +89,8 @@ const TeslaAllocationCalculator = () => {
                                         max="100" 
                                         value={optimus} 
                                         onChange={(e) => setOptimus(parseInt(e.target.value))}
-                                        className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00fbfb] hover:accent-[#00fbfb]/80 transition-all"
-                                        style={{
-                                            background: `linear-gradient(to right, #00fbfb ${optimus}%, rgba(255, 255, 255, 0.1) ${optimus}%)`
-                                        }}
+                                        className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00fbfb] hover:accent-[#00fbfb]/80 transition-all bg-[linear-gradient(to_right,#00fbfb_var(--range-progress),rgba(255,255,255,0.1)_var(--range-progress))]"
+                                        style={{ "--range-progress": `${optimus}%` } as React.CSSProperties}
                                         title="Optimus Adoption Percentage"
                                     />
                                     <div className="flex justify-between text-[10px] text-white/20 uppercase tracking-[0.2em] font-bold mt-4">

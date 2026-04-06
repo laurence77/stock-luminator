@@ -74,6 +74,7 @@ export default function DashboardLayout() {
           </div>
           <button 
             title="Terminate Session"
+            aria-label="Terminate Session"
             className="flex items-center gap-4 px-4 py-3 rounded-xl text-white/40 hover:text-rose-500 hover:bg-rose-500/10 transition-all duration-300"
           >
             <LogOut size={18} />
@@ -89,6 +90,7 @@ export default function DashboardLayout() {
           <div className="flex items-center gap-8 flex-1">
             <button 
               title="Open Mobile Menu"
+              aria-label="Open Mobile Menu"
               className="lg:hidden w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/60 hover:text-white transition-colors"
               onClick={() => setIsMobileMenuOpen(true)}
             >
@@ -112,7 +114,8 @@ export default function DashboardLayout() {
               <span className="text-[10px] text-white/30 font-black uppercase tracking-widest">+12.4% Capital Yield</span>
             </div>
             <button 
-              title="Notifications"
+              title="View Notifications"
+              aria-label="View Notifications"
               className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center relative transition-all group"
             >
               <Bell size={18} className="text-white/40 group-hover:text-[#00fbfb] transition-colors" />
@@ -154,6 +157,7 @@ export default function DashboardLayout() {
                 </div>
                 <button 
                   title="Close Mobile Menu"
+                  aria-label="Close Mobile Menu"
                   onClick={() => setIsMobileMenuOpen(false)} 
                   className="text-white/40 hover:text-white transition-colors"
                 >
@@ -185,6 +189,7 @@ export default function DashboardLayout() {
               <div className="mt-auto pt-8 border-t border-white/5">
                 <button 
                   title="Terminate Session"
+                  aria-label="Terminate Session"
                   className="flex items-center gap-4 w-full px-4 py-4 rounded-xl text-rose-500 bg-rose-500/5 transition-all duration-300 font-bold text-[14px]"
                 >
                   <LogOut size={20} />

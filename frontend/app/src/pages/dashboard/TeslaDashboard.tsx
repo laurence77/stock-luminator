@@ -65,7 +65,10 @@ export default function TeslaDashboard() {
             <div className="flex justify-between items-start mb-4">
               <div 
                 className="w-10 h-10 rounded-lg flex items-center justify-center border border-white/5"
-                style={{ backgroundColor: `${stat.color}10`, color: stat.color }}
+                style={{ 
+                  backgroundColor: `${stat.color}10`, 
+                  color: stat.color 
+                } as React.CSSProperties}
               >
                 <stat.icon size={20} />
               </div>
@@ -84,7 +87,7 @@ export default function TeslaDashboard() {
             {/* Background decorative element */}
             <div 
               className="absolute -bottom-4 -right-4 w-20 h-20 opacity-5 blur-2xl rounded-full"
-              style={{ backgroundColor: stat.color }}
+              style={{ backgroundColor: stat.color } as React.CSSProperties}
             />
           </motion.div>
         ))}
@@ -128,7 +131,7 @@ export default function TeslaDashboard() {
                       whileInView={{ width: `${item.value}%` }}
                       transition={{ duration: 1, delay: i * 0.2 }}
                       className="h-full rounded-full"
-                      style={{ backgroundColor: item.color }}
+                      style={{ backgroundColor: item.color } as React.CSSProperties}
                     />
                   </div>
                 </div>
