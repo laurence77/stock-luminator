@@ -29,26 +29,28 @@ function EcosystemCard({ item }: { item: TeslaEcosystemItem }) {
         style={{
           background: useMotionTemplate`
             radial-gradient(
-              400px circle at ${mouseX}px ${mouseY}px,
-              rgba(0, 251, 251, 0.15),
+              600px circle at ${mouseX}px ${mouseY}px,
+              rgba(0, 251, 251, 0.1),
               transparent 80%
             )
           `,
         }}
       />
       
-      <div className="h-[60px] flex items-center mb-8 relative z-10">
+      <div className="h-[200px] flex items-center justify-center mb-8 relative z-10 overflow-hidden rounded-xl border border-white/5 bg-black/20">
         {item.isLogo ? (
-          isTesla ? (
-            <TeslaLogo className="h-10 w-auto fill-white opacity-40 group-hover:opacity-100 transition-all duration-500" />
-          ) : (
-            <SpaceXLogo className="h-10 w-auto fill-white opacity-40 group-hover:opacity-100 transition-all duration-500" />
-          )
+          <div className="flex items-center justify-center p-12">
+            {isTesla ? (
+              <TeslaLogo className="h-12 w-auto fill-white opacity-40 group-hover:opacity-100 transition-all duration-500" />
+            ) : (
+              <SpaceXLogo className="h-10 w-auto fill-white opacity-40 group-hover:opacity-100 transition-all duration-500" />
+            )}
+          </div>
         ) : (
           <img 
             src={item.image} 
             alt={item.title} 
-            className="w-full h-full object-cover rounded-sm grayscale group-hover:grayscale-0 transition-all duration-700 shadow-2xl" 
+            className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-105 group-hover:scale-100" 
           />
         )}
       </div>

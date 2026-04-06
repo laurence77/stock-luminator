@@ -86,7 +86,7 @@ export const ecosystem: TeslaEcosystemItem[] = [
   {
     title: "Optimus Robotics",
     description: "The greatest product in the history of humanity. Autonomous bipeds designed to revolutionize the global labor economy.",
-    image: "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Optimus-Update-Hero-Mobile.jpg", // High-res Optimus
+    image: "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Optimus-Update-Hero-Desktop.jpg", // High-res Optimus Desktop
     color: "#6305ef",
   },
   {
