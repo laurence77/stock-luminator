@@ -54,11 +54,9 @@ function AnimatedRoutes() {
         </Route>
 
         {/* Dashboard Layout */}
-        <Route path="/dashboard" element={<DashboardLayout children={<TeslaDashboard />} />} />
-        <Route path="/dashboard/*" element={<DashboardLayout />}>
+        <Route path="/dashboard" element={<DashboardLayout />}>
            <Route index element={<TeslaDashboard />} />
            <Route path="tesla-dashboard" element={<TeslaDashboard />} />
-           {/* Add future dashboard sub-routes here */}
         </Route>
       </Routes>
     </AnimatePresence>

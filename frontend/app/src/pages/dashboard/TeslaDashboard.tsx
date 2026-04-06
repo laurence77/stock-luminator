@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { staggerContainer, fadeInUp, viewportOptions } from '@/lib/animations';
+import { staggerContainer, fadeInUp } from '@/lib/animations';
 import PerformanceChart from '@/components/dashboard/PerformanceChart';
 import InstitutionalLedger from '@/components/dashboard/InstitutionalLedger';
 import TradingInterface from '@/components/dashboard/TradingInterface';
