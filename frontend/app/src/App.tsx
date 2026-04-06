@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
 import { CustomCursor } from '@/components/ui/CustomCursor';
+import { AuthProvider } from '@/context/AuthContext';
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
 
 // Layouts
 import { MainLayout } from '@/layouts/MainLayout';
@@ -13,8 +15,10 @@ import { DashboardLayout } from '@/layouts/DashboardLayout';
 const Home = lazy(() => import('@/pages/Home'));
 const SignIn = lazy(() => import('@/pages/SignIn').then(m => ({ default: m.SignIn })));
 const SignUp = lazy(() => import('@/pages/SignUp').then(m => ({ default: m.SignUp })));
-const Markets = lazy(() => import('@/pages/Markets').then(m => ({ default: m.Markets })));
-const ServicePage = lazy(() => import('@/pages/ServicePage').then(m => ({ default: m.ServicePage })));
+const MfaVerification = lazy(() => import('./features/auth/MfaVerification'));
+const KycOnboarding = lazy(() => import('./features/onboarding/KycStepper'));
+const Markets = lazy(() => import('./pages/Markets').then(m => ({ default: m.Markets })));
+const ServicePage = lazy(() => import('./pages/ServicePage').then(m => ({ default: m.ServicePage })));
 const TeslaLandingPage = lazy(() => import('@/pages/tesla/TeslaLandingPage'));
 const SpaceXLandingPage = lazy(() => import('@/pages/spacex/SpaceXLandingPage'));
 const AISystemsLandingPage = lazy(() => import('@/pages/ai-systems/AISystemsLandingPage'));
@@ -41,6 +45,14 @@ function AnimatedRoutes() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/get-started" element={<SignUp />} />
+        <Route path="/verify-mfa" element={<MfaVerification />} />
+
+        {/* Protected Onboarding */}
+        <Route path="/onboarding" element={
+          <ProtectedRoute>
+            <KycOnboarding />
+          </ProtectedRoute>
+        } />
 
         {/* Deep Dive Services Layout */}
         <Route path="/services" element={<ServiceLayout />}>
@@ -54,7 +66,11 @@ function AnimatedRoutes() {
         </Route>
 
         {/* Dashboard Layout */}
-        <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }>
            <Route index element={<TeslaDashboard />} />
            <Route path="tesla-dashboard" element={<TeslaDashboard />} />
         </Route>
@@ -66,10 +82,12 @@ function AnimatedRoutes() {
 function App() {
   return (
     <BrowserRouter basename="/stock-luminator">
-      <CustomCursor />
-      <Suspense fallback={<LoadingScreen />}>
-        <AnimatedRoutes />
-      </Suspense>
+      <AuthProvider>
+        <CustomCursor />
+        <Suspense fallback={<LoadingScreen />}>
+          <AnimatedRoutes />
+        </Suspense>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

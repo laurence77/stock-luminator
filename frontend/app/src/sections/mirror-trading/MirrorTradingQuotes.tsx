@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportOptions } from '@/lib/animations';
 
 const quotes = [
@@ -19,20 +19,69 @@ const quotes = [
   }
 ];
 
-/**
- * MirrorTradingQuotes - Institutional validation for portfolio synchronization.
- * Features glassy Navy/Slate cards with premium typography.
- */
+function MirrorQuoteCard({ quote }: { quote: typeof quotes[0] }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div 
+      variants={fadeInUp}
+      onMouseMove={handleMouseMove}
+      className="p-12 bg-[#0a0a0f] border border-white/5 hover:border-[#38bdf8]/30 transition-all duration-500 relative flex flex-col group backdrop-blur-xl rounded-2xl overflow-hidden"
+    >
+      {/* Spotlight Effect */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              600px circle at ${mouseX}px ${mouseY}px,
+              rgba(56, 189, 248, 0.08),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
+      <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-[#38bdf8]/10 group-hover:border-[#38bdf8]/40 transition-colors duration-500" />
+      
+      <div className="relative z-10 flex flex-col h-full">
+        <p className="text-[19px] text-zinc-400 leading-relaxed mb-16 italic group-hover:text-zinc-200 transition-colors duration-500 font-light">
+          "{quote.text}"
+        </p>
+        
+        <div className="mt-auto">
+          <p className="text-[14px] font-black text-[#38bdf8] uppercase tracking-[0.2em] mb-1">
+            {quote.author}
+          </p>
+          <p className="text-[10px] text-zinc-600 uppercase tracking-[0.3em] font-bold">
+            {quote.position}
+          </p>
+        </div>
+
+        {/* Decorative sync pulse */}
+        <div className="absolute bottom-12 right-12 w-2 h-2 rounded-full bg-[#38bdf8] opacity-0 group-hover:opacity-40 animate-ping transition-opacity duration-700" />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function MirrorTradingQuotes() {
   return (
-    <section className="py-32 bg-[#020617] relative overflow-hidden border-t border-white/5">
+    <section className="py-32 bg-[#02040a] relative overflow-hidden border-t border-white/5">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="mb-20 text-center">
+        <div className="mb-24 text-center">
           <motion.h2 
              initial={{ opacity: 0, y: 10 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={viewportOptions}
-             className="text-[12px] font-bold tracking-[0.4em] text-[#38bdf8] uppercase mb-4"
+             className="text-[14px] font-black tracking-[0.5em] text-[#38bdf8] uppercase mb-6"
           >
             Institutional Validation
           </motion.h2>
@@ -40,9 +89,12 @@ export default function MirrorTradingQuotes() {
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={viewportOptions}
-             className="text-[32px] md:text-[54px] font-black text-white uppercase leading-tight"
+             className="text-[36px] md:text-[64px] font-black text-white uppercase leading-[1] tracking-tighter"
           >
-            DEMOCRATIZING <span className="text-[#38bdf8]">HEDGE-FUND ALPHA.</span>
+            DEMOCRATIZING <br />
+            <span className="bg-gradient-to-r from-[#38bdf8] via-white to-[#38bdf8] bg-clip-text text-transparent">
+              HEDGE-FUND ALPHA.
+            </span>
           </motion.p>
         </div>
 
@@ -51,29 +103,10 @@ export default function MirrorTradingQuotes() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOptions}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-12"
         >
           {quotes.map((quote, idx) => (
-            <motion.div 
-              key={idx}
-              variants={fadeInUp}
-              className="p-10 bg-white/5 border border-white/10 hover:border-[#38bdf8]/60 transition-all duration-500 relative flex flex-col group backdrop-blur-xl rounded-2xl"
-            >
-              <div className="absolute top-0 right-0 w-12 h-12 border-t border-r border-white/10 group-hover:border-[#38bdf8]/60 transition-colors" />
-              
-              <p className="text-[17px] text-zinc-300 leading-relaxed mb-12 italic group-hover:text-white transition-colors">
-                "{quote.text}"
-              </p>
-              
-              <div className="mt-auto">
-                <p className="text-[14px] font-bold text-[#38bdf8] uppercase tracking-widest">
-                  {quote.author}
-                </p>
-                <p className="text-[11px] text-zinc-500 uppercase tracking-widest">
-                  {quote.position}
-                </p>
-              </div>
-            </motion.div>
+            <MirrorQuoteCard key={idx} quote={quote} />
           ))}
         </motion.div>
       </div>

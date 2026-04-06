@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportOptions } from '@/lib/animations';
 
 const stats = [
@@ -24,10 +24,59 @@ const stats = [
   },
 ];
 
-/**
- * SpaceX Stats Section - High-visibility data visualizations for institutional investors.
- * Uses a "Mars-inspired" orange gradient for key metrics.
- */
+function SpaceXStatCard({ stat }: { stat: typeof stats[0] }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div 
+      variants={fadeInUp}
+      onMouseMove={handleMouseMove}
+      className="p-10 bg-white/5 border border-white/10 transition-colors duration-500 group relative overflow-hidden"
+    >
+      {/* Spotlight Effect */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              600px circle at ${mouseX}px ${mouseY}px,
+              rgba(249, 115, 22, 0.1),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+      
+      <div className="absolute top-0 left-0 w-1 h-0 bg-[#f97316] group-hover:h-full transition-all duration-700" />
+      
+      <p className="text-[11px] font-bold tracking-[0.2em] text-white/40 uppercase mb-8 relative z-10">
+        {stat.label}
+      </p>
+      
+      <h3 className="text-[44px] md:text-[52px] font-black mb-4 tracking-tighter bg-gradient-to-br from-[#f97316] via-white to-white bg-clip-text text-transparent relative z-10">
+        {stat.value}
+      </h3>
+      
+      <p className="text-[14px] text-gray-500 font-medium leading-relaxed group-hover:text-gray-300 transition-colors relative z-10">
+        {stat.subtext}
+      </p>
+
+      {/* Decorative Tech Detail */}
+      <div className="mt-8 flex gap-1 transform group-hover:translate-x-1 transition-transform relative z-10">
+        <div className="w-1.5 h-1.5 bg-[#f97316] rounded-full animate-pulse" />
+        <div className="w-8 h-1.5 bg-white/10 rounded-full" />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function SpaceXStats() {
   return (
     <section className="py-32 bg-[#050505] relative overflow-hidden border-t border-white/5">
@@ -65,31 +114,7 @@ export default function SpaceXStats() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {stats.map((stat, idx) => (
-            <motion.div 
-              key={idx}
-              variants={fadeInUp}
-              className="p-10 bg-white/5 border border-white/10 hover:border-[#f97316]/30 transition-all duration-500 group relative"
-            >
-              <div className="absolute top-0 left-0 w-1 h-0 bg-[#f97316] group-hover:h-full transition-all duration-700" />
-              
-              <p className="text-[11px] font-bold tracking-[0.2em] text-white/40 uppercase mb-8">
-                {stat.label}
-              </p>
-              
-              <h3 className="text-[44px] md:text-[52px] font-black mb-4 tracking-tighter bg-gradient-to-br from-[#f97316] via-white to-white bg-clip-text text-transparent">
-                {stat.value}
-              </h3>
-              
-              <p className="text-[14px] text-gray-500 font-medium leading-relaxed group-hover:text-gray-300 transition-colors">
-                {stat.subtext}
-              </p>
-
-              {/* Decorative Tech Detail */}
-              <div className="mt-8 flex gap-1 transform group-hover:translate-x-1 transition-transform">
-                <div className="w-1.5 h-1.5 bg-[#f97316] rounded-full animate-pulse" />
-                <div className="w-8 h-1.5 bg-white/10 rounded-full" />
-              </div>
-            </motion.div>
+            <SpaceXStatCard key={idx} stat={stat} />
           ))}
         </motion.div>
       </div>

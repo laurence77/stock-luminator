@@ -1,0 +1,20 @@
+/* MirrorTradingHero.css */
+.mirror-grid {
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.sync-glow {
+  background: radial-gradient(circle at center, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+}
+
+.mirror-scanline {
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(30, 41, 59, 0.2) 50%
+  );
+  background-size: 100% 4px;
+}

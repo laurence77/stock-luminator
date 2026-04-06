@@ -1,0 +1,31 @@
+/* TeslaAllocationCalculator.css */
+.tesla-range-slider {
+  --range-progress: 0%;
+  appearance: none;
+  background: linear-gradient(
+    to right,
+    #00fbfb var(--range-progress),
+    rgba(255, 255, 255, 0.1) var(--range-progress)
+  ) !important;
+}
+
+.tesla-range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #00fbfb;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 251, 251, 0.5);
+  border: 2px solid white;
+}
+
+.tesla-range-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #00fbfb;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 251, 251, 0.5);
+  border: 2px solid white;
+}

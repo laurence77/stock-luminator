@@ -1,0 +1,19 @@
+/* SignIn.css */
+.signin-brand-panel {
+  display: none;
+  background-color: black;
+  background-image: url('/images/stock.jpg');
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 1024px) {
+  .signin-brand-panel {
+    display: flex;
+    width: 50%;
+    position: relative;
+  }
+}

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportOptions } from '@/lib/animations';
 
 const stats = [
@@ -24,31 +24,83 @@ const stats = [
   },
 ];
 
-/**
- * DigitalAssetsStats - Performance metrics for high-frequency digital asset infrastructure.
- * Features vibrant Solana-green and purple accents in a high-fidelity dashboard aesthetic.
- */
+function DigitalAssetStatCard({ stat }: { stat: typeof stats[0] }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div 
+      variants={fadeInUp}
+      onMouseMove={handleMouseMove}
+      className="p-12 bg-[#0a0a0f] border border-white/5 hover:border-[#14f195]/20 transition-all duration-500 group relative overflow-hidden"
+    >
+      {/* Spotlight Effect */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              600px circle at ${mouseX}px ${mouseY}px,
+              rgba(20, 241, 149, 0.08),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
+      <div className="relative z-10">
+        <div className="absolute top-0 left-0 w-1 h-0 bg-[#8b5cf6] group-hover:h-8 transition-all duration-700" />
+        
+        <p className="text-[12px] font-black tracking-[0.3em] text-zinc-500 uppercase mb-10 group-hover:text-zinc-300 transition-colors">
+          {stat.label}
+        </p>
+        
+        <h3 className="text-[52px] md:text-[64px] font-black mb-6 tracking-tighter bg-gradient-to-br from-[#14f195] via-white to-zinc-400 bg-clip-text text-transparent group-hover:scale-[1.02] transition-transform duration-500 origin-left">
+          {stat.value}
+        </h3>
+        
+        <p className="text-[15px] text-zinc-500 font-light leading-relaxed group-hover:text-zinc-300 transition-colors">
+          {stat.subtext}
+        </p>
+
+        {/* Decorative Hardware Detail */}
+        <div className="mt-10 flex items-center gap-3 opacity-20 group-hover:opacity-50 transition-all duration-700">
+          <div className="w-2 h-2 rounded-full bg-[#14f195] animate-pulse" />
+          <div className="flex-1 h-px bg-gradient-to-r from-[#14f195] to-transparent" />
+          <span className="text-[9px] font-mono text-white/50 tracking-widest uppercase">Verified</span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function DigitalAssetsStats() {
   return (
-    <section className="py-32 bg-[#0a0a0c] relative overflow-hidden border-t border-white/5">
+    <section className="py-32 bg-[#020205] relative overflow-hidden border-t border-white/5">
       {/* Network Glow Flare */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#14f195]/5 blur-[160px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#14f195]/5 blur-[200px] pointer-events-none rounded-full" />
       
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="mb-20">
+        <div className="mb-24">
           <motion.h2 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={viewportOptions}
-            className="text-[12px] font-bold tracking-[0.4em] text-[#14f195] uppercase mb-4"
+            className="text-[14px] font-black tracking-[0.5em] text-[#14f195] uppercase mb-6"
           >
-            Infrastructure Metrics
+            Digital Asset Performance
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportOptions}
-            className="text-[32px] md:text-[54px] font-black text-white max-w-[900px] leading-[1.1] tracking-[-0.04em] uppercase"
+            className="text-[36px] md:text-[64px] font-black text-white max-w-[1000px] leading-[1] tracking-[-0.05em] uppercase"
           >
             PRECISION YIELD. <br />
             <span className="bg-gradient-to-r from-[#14f195] via-[#8b5cf6] to-[#14f195] bg-clip-text text-transparent">
@@ -62,34 +114,10 @@ export default function DigitalAssetsStats() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOptions}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
         >
           {stats.map((stat, idx) => (
-            <motion.div 
-              key={idx}
-              variants={fadeInUp}
-              className="p-10 bg-white/5 border border-white/10 hover:border-[#14f195]/30 transition-all duration-500 group relative"
-            >
-              <div className="absolute top-0 left-0 w-1 h-0 bg-[#8b5cf6] group-hover:h-full transition-all duration-700" />
-              
-              <p className="text-[11px] font-bold tracking-[0.2em] text-white/40 uppercase mb-8">
-                {stat.label}
-              </p>
-              
-              <h3 className="text-[44px] md:text-[52px] font-black mb-4 tracking-tighter bg-gradient-to-br from-[#14f195] via-white to-white bg-clip-text text-transparent">
-                {stat.value}
-              </h3>
-              
-              <p className="text-[14px] text-gray-500 font-medium leading-relaxed group-hover:text-gray-300 transition-colors">
-                {stat.subtext}
-              </p>
-
-              {/* Decorative Tech Detail */}
-              <div className="mt-8 flex gap-1 transform group-hover:translate-x-1 transition-transform">
-                <div className="w-1.5 h-1.5 bg-[#14f195] rounded-full animate-pulse" />
-                <div className="w-8 h-1.5 bg-white/10 rounded-full" />
-              </div>
-            </motion.div>
+            <DigitalAssetStatCard key={idx} stat={stat} />
           ))}
         </motion.div>
       </div>

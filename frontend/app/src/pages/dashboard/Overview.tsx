@@ -35,7 +35,7 @@ export function Overview() {
         })}
       </div>
 
-      <div className="bg-white  shadow-sm p-6 flex flex-col" style={{ minHeight: '500px' }}>
+      <div className="bg-white shadow-sm p-6 flex flex-col min-h-[500px]">
         <h3 className="text-lg font-bold text-gray-900 mb-4 tracking-wide uppercase">Portfolio Performance</h3>
         <div className="flex-1 w-full  overflow-hidden border-gray-100">
           <AdvancedRealTimeChart 

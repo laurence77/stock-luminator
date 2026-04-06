@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Mail, Lock } from 'lucide-react';
 import { slideInRight } from '../lib/animations';
+import './SignIn.css';
 
 export function SignIn() {
   const [email, setEmail] = useState('');
@@ -21,14 +22,7 @@ export function SignIn() {
   return (
     <div className="min-h-screen flex bg-brand-surface font-sans">
       {/* Left Panel - Image/Brand with dynamic pathing */}
-      <div 
-        className="hidden lg:flex lg:w-1/2 relative bg-black items-center justify-center overflow-hidden"
-        style={{ 
-          backgroundImage: `url('${import.meta.env.BASE_URL}images/stock.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
+      <div className="signin-brand-panel">
         <div className="absolute inset-0 bg-[#131118]/40 backdrop-blur-[2px]"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/80 to-brand-dark/90 mix-blend-multiply"></div>
         

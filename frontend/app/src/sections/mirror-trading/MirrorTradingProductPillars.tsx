@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportOptions } from '@/lib/animations';
 import { UserCheck, RefreshCw, Sliders } from 'lucide-react';
 
@@ -20,17 +20,69 @@ const pillars = [
   },
 ];
 
-/**
- * MirrorTradingProductPillars - High-fidelity feature showcase for Mirror Trading.
- * Features dark glassmorphism and premium Navy/Slate accents.
- */
+function MirrorPillarCard({ pillar }: { pillar: typeof pillars[0] }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div
+      variants={fadeInUp}
+      onMouseMove={handleMouseMove}
+      className="group relative p-12 bg-[#0a0a0f] border border-white/5 hover:border-[#38bdf8]/20 transition-all duration-500 overflow-hidden backdrop-blur-xl rounded-2xl"
+    >
+      {/* Spotlight Effect */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              650px circle at ${mouseX}px ${mouseY}px,
+              rgba(56, 189, 248, 0.08),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+      
+      <div className="relative z-10">
+        <div className="mb-10 inline-block p-4 bg-[#38bdf8]/5 border border-[#38bdf8]/10 rounded-2xl group-hover:scale-110 group-hover:border-[#38bdf8]/30 transition-all duration-700">
+          {pillar.icon}
+        </div>
+        
+        <h3 className="text-[26px] font-bold text-white mb-6 tracking-tight uppercase group-hover:text-[#38bdf8] transition-colors duration-500">
+          {pillar.title}
+        </h3>
+        
+        <div className="w-16 h-px bg-[#38bdf8]/10 mb-8 group-hover:w-full group-hover:bg-[#38bdf8]/30 transition-all duration-1000" />
+        
+        <p className="text-zinc-500 leading-relaxed font-light text-[16px] group-hover:text-zinc-300 transition-colors duration-500">
+          {pillar.description}
+        </p>
+      </div>
+
+      {/* Institutional Hardware Accents */}
+      <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+        <div className="w-8 h-8 border-t border-r border-[#38bdf8]/20" />
+      </div>
+      <div className="absolute bottom-0 left-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+        <div className="w-8 h-8 border-b border-l border-[#38bdf8]/20" />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function MirrorTradingProductPillars() {
   return (
-    <section className="py-32 bg-[#020617] relative overflow-hidden border-t border-white/5">
-      {/* Background Glass Blur Detail */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#38bdf8]/40 to-transparent" />
-      </div>
+    <section className="py-32 bg-[#02040a] relative overflow-hidden border-t border-white/5">
+      {/* Dynamic Sync Decoration */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#38bdf8]/10 to-transparent" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -38,33 +90,10 @@ export default function MirrorTradingProductPillars() {
            initial="hidden"
            whileInView="visible"
            viewport={viewportOptions}
-           className="grid grid-cols-1 md:grid-cols-3 gap-8"
+           className="grid grid-cols-1 md:grid-cols-3 gap-12"
         >
           {pillars.map((pillar, index) => (
-            <motion.div
-              key={index}
-              variants={fadeInUp}
-              className="group relative p-10 bg-white/5 border border-white/10 hover:border-[#38bdf8]/30 transition-all duration-500 overflow-hidden backdrop-blur-xl rounded-2xl"
-            >
-              <div className="relative z-10">
-                <div className="mb-8 inline-block p-4 bg-white/5 border border-white/10 rounded-xl group-hover:scale-105 transition-transform duration-500">
-                  {pillar.icon}
-                </div>
-                
-                <h3 className="text-[22px] font-bold text-white mb-6 tracking-tight uppercase group-hover:text-[#38bdf8] transition-colors">
-                  {pillar.title}
-                </h3>
-                
-                <div className="w-12 h-px bg-white/20 mb-6 group-hover:w-full group-hover:bg-[#38bdf8]/50 transition-all duration-700" />
-                
-                <p className="text-zinc-400 leading-relaxed font-light text-[15px] group-hover:text-zinc-200 transition-colors">
-                  {pillar.description}
-                </p>
-              </div>
-
-              {/* Bottom corner detail */}
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/5 group-hover:border-[#38bdf8]/40 transition-colors" />
-            </motion.div>
+            <MirrorPillarCard key={index} pillar={pillar} />
           ))}
         </motion.div>
       </div>

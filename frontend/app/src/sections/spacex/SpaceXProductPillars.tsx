@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportOptions } from '@/lib/animations';
 import { Satellite, Rocket, Globe } from 'lucide-react';
 
@@ -20,19 +20,69 @@ const pillars = [
   },
 ];
 
-/**
- * SpaceX Product Pillars - Cinematic feature showcase for core investment themes.
- * Uses high-contrast dark aesthetics and institutional staggered reveals.
- */
+function PillarCard({ pillar }: { pillar: typeof pillars[0] }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div
+      variants={fadeInUp}
+      onMouseMove={handleMouseMove}
+      className="group relative p-12 bg-[#0a0a0f] border border-white/5 hover:border-[#00fbfb]/20 transition-all duration-500 overflow-hidden"
+    >
+      {/* Spotlight Effect */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              600px circle at ${mouseX}px ${mouseY}px,
+              rgba(0, 251, 251, 0.08),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+      
+      <div className="relative z-10">
+        <div className="mb-10 inline-block p-4 bg-white/5 border border-white/10 rounded-2xl group-hover:scale-110 group-hover:border-[#00fbfb]/30 transition-all duration-700">
+          {pillar.icon}
+        </div>
+        
+        <h3 className="text-[26px] font-bold text-white mb-6 tracking-tight uppercase group-hover:text-[#00fbfb] transition-colors duration-500">
+          {pillar.title}
+        </h3>
+        
+        <div className="w-16 h-px bg-white/10 mb-8 group-hover:w-full group-hover:bg-[#00fbfb]/30 transition-all duration-1000" />
+        
+        <p className="text-zinc-500 leading-relaxed font-light text-[16px] group-hover:text-zinc-300 transition-colors duration-500">
+          {pillar.description}
+        </p>
+      </div>
+
+      {/* Institutional Hardware Accents */}
+      <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+        <div className="w-8 h-8 border-t border-r border-white/20" />
+      </div>
+      <div className="absolute bottom-0 left-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+        <div className="w-8 h-8 border-b border-l border-white/20" />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function SpaceXProductPillars() {
   return (
-    <section className="py-32 bg-[#050505] relative overflow-hidden border-t border-white/5">
-      {/* Background Grid Accent */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        <div 
-          className="absolute inset-0 bg-dot-grid [--grid-color:rgba(255,255,255,0.1)] [--grid-size:30px]" 
-        />
-      </div>
+    <section className="py-32 bg-[#020205] relative overflow-hidden border-t border-white/5">
+      {/* Dynamic Cosmic Background Decoration */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00fbfb]/20 to-transparent" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00fbfb]/20 to-transparent" />
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -40,36 +90,10 @@ export default function SpaceXProductPillars() {
            initial="hidden"
            whileInView="visible"
            viewport={viewportOptions}
-           className="grid grid-cols-1 md:grid-cols-3 gap-8"
+           className="grid grid-cols-1 md:grid-cols-3 gap-12"
         >
           {pillars.map((pillar, index) => (
-            <motion.div
-              key={index}
-              variants={fadeInUp}
-              className="group relative p-10 bg-white/5 border border-white/10 hover:border-[#00fbfb]/30 transition-all duration-500 overflow-hidden"
-            >
-              {/* Card Glow Effect */}
-              <div className="absolute -inset-px bg-gradient-to-br from-[#00fbfb]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              
-              <div className="relative z-10">
-                <div className="mb-8 inline-block p-4 bg-white/5 border border-white/10 rounded-xl group-hover:scale-110 transition-transform duration-500">
-                  {pillar.icon}
-                </div>
-                
-                <h3 className="text-[24px] font-bold text-white mb-6 tracking-tight uppercase group-hover:text-[#00fbfb] transition-colors">
-                  {pillar.title}
-                </h3>
-                
-                <div className="w-12 h-px bg-white/20 mb-6 group-hover:w-full group-hover:bg-[#00fbfb]/50 transition-all duration-700" />
-                
-                <p className="text-gray-400 leading-relaxed font-light text-[15px] group-hover:text-gray-200 transition-colors">
-                  {pillar.description}
-                </p>
-              </div>
-
-              {/* Bottom corner accent */}
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/5 group-hover:border-[#00fbfb]/40 transition-colors" />
-            </motion.div>
+            <PillarCard key={index} pillar={pillar} />
           ))}
         </motion.div>
       </div>

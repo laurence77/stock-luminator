@@ -4,11 +4,15 @@ import * as Tabs from '@radix-ui/react-tabs';
 import * as Slider from '@radix-ui/react-slider';
 import * as Switch from '@radix-ui/react-switch';
 import { fadeInUp } from '@/lib/animations';
-import { Zap, Shield, HelpCircle } from 'lucide-react';
+import { Zap, Shield, HelpCircle, Activity } from 'lucide-react';
+import { useLiveMarketData } from '@/hooks/useLiveMarketData';
 
 export default function TradingInterface() {
   const [allocation, setAllocation] = useState([25]);
   const [isEmergency, setIsEmergency] = useState(false);
+  const { data, isConnected } = useLiveMarketData(['TSLA']);
+  
+  const currentPrice = data['TSLA']?.price || 240.42;
 
   return (
     <motion.div 
@@ -24,10 +28,16 @@ export default function TradingInterface() {
           </div>
           <div>
             <h3 className="text-white text-[18px] font-bold tracking-tight">Execution Engine</h3>
-            <p className="text-white/40 text-[12px]">HFT Optimized Proxy</p>
+            <p className="text-white/40 text-[12px]">HFT Optimized Proxy (TSLA)</p>
           </div>
         </div>
-        <HelpCircle size={18} className="text-white/20 hover:text-white cursor-help transition-colors" />
+        <div className="flex items-center gap-4">
+          <div className="flex flex-col items-end mr-4">
+            <span className="text-[10px] font-bold text-white/20 uppercase tracking-widest">Live Quote</span>
+            <span className="text-[18px] font-black text-white font-mono">${currentPrice.toFixed(2)}</span>
+          </div>
+          <HelpCircle size={18} className="text-white/20 hover:text-white cursor-help transition-colors" />
+        </div>
       </div>
 
       <Tabs.Root defaultValue="market" className="flex flex-col gap-8 flex-1">
@@ -56,12 +66,13 @@ export default function TradingInterface() {
               max={100}
               step={1}
               onValueChange={setAllocation}
+              disabled={!isConnected}
             >
               <Slider.Track className="bg-white/5 relative grow rounded-full h-1.5 border border-white/5 overflow-hidden">
                 <Slider.Range className="absolute bg-[#00fbfb] h-full" />
               </Slider.Track>
               <Slider.Thumb 
-                className="block w-6 h-6 bg-white border-2 border-[#00fbfb] shadow-2xl rounded-full hover:scale-110 focus:outline-none focus:ring-4 focus:ring-[#00fbfb]/20 transition-all cursor-grab active:cursor-grabbing" 
+                className="block w-6 h-6 bg-white border-2 border-[#00fbfb] shadow-2xl rounded-full hover:scale-110 focus:outline-none focus:ring-4 focus:ring-[#00fbfb]/20 transition-all cursor-grab active:cursor-grabbing disabled:cursor-not-allowed" 
                 aria-label="Allocation Weight"
               />
             </Slider.Root>
@@ -70,14 +81,22 @@ export default function TradingInterface() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-3">
               <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest px-2">Order Side</label>
-              <button className="w-full bg-[#00fbfb] hover:bg-[#6305ef] text-[#131318] hover:text-white py-4 rounded-xl text-[14px] font-black uppercase tracking-widest transition-all duration-500 shadow-xl shadow-[#00fbfb]/10 group overflow-hidden relative">
+              <button 
+                disabled={!isConnected || isEmergency}
+                className="w-full bg-[#00fbfb] hover:bg-[#6305ef] text-[#131318] hover:text-white disabled:bg-white/5 disabled:text-white/20 disabled:cursor-not-allowed py-4 rounded-xl text-[14px] font-black uppercase tracking-widest transition-all duration-500 shadow-xl shadow-[#00fbfb]/10 group overflow-hidden relative"
+              >
                 <span className="relative z-10">Buy TSLA</span>
-                <div className="absolute inset-0 bg-[#6305ef] -translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                {isConnected && !isEmergency && (
+                  <div className="absolute inset-0 bg-[#6305ef] -translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                )}
               </button>
             </div>
             <div className="space-y-3">
               <label className="text-[11px] font-bold text-white/40 uppercase tracking-widest px-2">Liquidity</label>
-              <button className="w-full bg-white/5 border border-white/10 hover:bg-rose-500/10 hover:border-rose-500/30 text-white/60 hover:text-rose-500 py-4 rounded-xl text-[14px] font-black uppercase tracking-widest transition-all duration-500">
+              <button 
+                disabled={!isConnected || isEmergency}
+                className="w-full bg-white/5 border border-white/10 hover:bg-rose-500/10 hover:border-rose-500/30 text-white/60 hover:text-rose-500 disabled:opacity-20 disabled:cursor-not-allowed py-4 rounded-xl text-[14px] font-black uppercase tracking-widest transition-all duration-500"
+              >
                 Sell TSLA
               </button>
             </div>
@@ -98,6 +117,13 @@ export default function TradingInterface() {
             >
               <Switch.Thumb className="block w-4 h-4 bg-white/10 border border-white/20 rounded-full transition-transform duration-300 translate-x-1 data-[state=checked]:translate-x-6 data-[state=checked]:bg-rose-500 data-[state=checked]:border-white/20" />
             </Switch.Root>
+          </div>
+
+          <div className="mt-4 flex items-center justify-center gap-2">
+            <Activity size={12} className={isConnected ? 'text-[#00fbfb] animate-pulse' : 'text-rose-500'} />
+            <span className={`text-[10px] font-bold uppercase tracking-widest ${isConnected ? 'text-white/20' : 'text-rose-500'}`}>
+              {isConnected ? 'Bridge Synchronized' : 'Bridge Terminated'}
+            </span>
           </div>
         </Tabs.Content>
       </Tabs.Root>

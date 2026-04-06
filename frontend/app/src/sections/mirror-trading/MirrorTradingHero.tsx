@@ -1,97 +1,112 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { fadeInUp, heroContainer } from '@/lib/animations';
 import LiveSyncFeed from './LiveSyncFeed';
+import './MirrorTradingHero.css';
 
-/**
- * Mirror Trading Hero - "Institutional-Grade Portfolio Synchronization."
- * Features dark glassmorphism against Navy/Slate backgrounds for a premium feel.
- */
 export default function MirrorTradingHero() {
   const { scrollY } = useScroll();
+  
+  // Parallax transforms for high-fidelity immersion
   const backgroundY = useTransform(scrollY, [0, 1000], ['0%', '15%']);
+  const contentY = useTransform(scrollY, [0, 1000], [0, 80]);
+  const starOpacity = useTransform(scrollY, [0, 500], [0.8, 0.2]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#020617]">
-      {/* Deep Navy/Slate Parallax Fade */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#02040a]">
+      {/* Background Matrix/Network Grid */}
       <motion.div 
-        style={{ y: backgroundY }}
-        className="absolute inset-0 z-0 origin-top opacity-30"
+        style={{ y: backgroundY, opacity: starOpacity }}
+        className="absolute inset-0 z-0 select-none pointer-events-none mirror-grid"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1e293b]/20 to-transparent blur-[160px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#02040a] via-transparent to-[#02040a]" />
       </motion.div>
 
+      {/* Atmospheric scanlines */}
+      <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none mirror-scanline" />
+
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <motion.div
             variants={heroContainer}
             initial="hidden"
             animate="visible"
+            style={{ y: contentY }}
             className="flex flex-col items-start"
           >
             {/* Sync Label */}
             <motion.div
               variants={fadeInUp}
-              className="mb-8 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center gap-2 shadow-2xl"
+              className="mb-10 px-6 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl inline-flex items-center gap-3 group"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse" />
-              <span className="text-[10px] sm:text-[12px] font-bold tracking-[0.3em] uppercase text-white/60">
-                Institutional Portfolio Sync
+              <div className="relative">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#38bdf8] animate-ping absolute inset-0" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#38bdf8] relative z-10" />
+              </div>
+              <span className="text-[10px] sm:text-[11px] font-black tracking-[0.4em] uppercase text-white/50 group-hover:text-white transition-colors duration-500">
+                Institutional Sync Layer
               </span>
             </motion.div>
 
             {/* Primary Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="text-[48px] sm:text-[68px] md:text-[84px] font-black tracking-[-0.05em] uppercase leading-[0.95] mb-8 bg-gradient-to-br from-white via-white to-white/40 bg-clip-text text-transparent"
+              className="text-[48px] sm:text-[72px] md:text-[100px] font-black tracking-[-0.05em] uppercase leading-[0.85] mb-10"
             >
-              Institutional-Grade <br />
-              <span className="bg-gradient-to-r from-[#38bdf8] to-white bg-clip-text text-transparent">Synchronization.</span>
+              <span className="text-white">Institutional-Grade</span> <br />
+              <span className="bg-gradient-to-r from-[#38bdf8] via-white to-[#38bdf8] bg-clip-text text-transparent">Synchronization.</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
-              className="max-w-[560px] text-[16px] sm:text-[18px] text-zinc-400 font-light leading-relaxed mb-12"
+              className="max-w-[560px] text-[17px] sm:text-[20px] text-zinc-400 font-light leading-relaxed mb-16 tracking-tight"
             >
               Mirror the exact trades of verified hedge fund managers and quantitative desks with millisecond-precision ledger replication and granular risk controls.
             </motion.p>
 
-            {/* CTA Button */}
-            <motion.div variants={fadeInUp}>
+            {/* CTA Button Suite */}
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-6">
               <a
                 href="#mirror-feed"
-                className="px-10 py-5 bg-white text-black font-bold uppercase tracking-[0.1em] text-[14px] hover:bg-[#38bdf8] hover:text-white transition-all shadow-2xl hover:-translate-y-1 active:scale-[0.98]"
+                className="relative group px-12 py-6 overflow-hidden bg-white transition-all hover:bg-[#38bdf8]"
               >
-                Access Alpha Creators
+                <span className="relative z-10 text-[#02040a] group-hover:text-white font-black uppercase tracking-[0.2em] text-[13px] transition-colors">
+                  Access Alpha Creators
+                </span>
+              </a>
+              <a
+                href="#docs"
+                className="px-12 py-6 border border-white/10 bg-white/5 backdrop-blur-md rounded-sm hover:border-[#38bdf8]/50 transition-all"
+              >
+                <span className="text-white/40 font-bold uppercase tracking-[0.15em] text-[13px] hover:text-[#38bdf8] transition-colors">
+                  Strategy Ledger
+                </span>
               </a>
             </motion.div>
           </motion.div>
 
           {/* Integrated Live Feed Visualizer */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.5, delay: 0.4 }}
             className="hidden lg:block relative"
           >
+            <div className="absolute -inset-10 bg-gradient-to-br from-[#38bdf8]/20 to-transparent blur-[100px] opacity-10 pointer-events-none" />
             <LiveSyncFeed />
             
             {/* Institutional metadata deco */}
-            <div className="absolute -bottom-10 -right-4 flex flex-col items-end opacity-40">
-              <span className="text-[10px] font-mono text-[#38bdf8] uppercase tracking-widest">
-                Mirroring_Synchronization: Active
+            <div className="absolute -bottom-12 -right-6 flex flex-col items-end opacity-20 group">
+              <span className="text-[10px] font-black text-[#38bdf8] uppercase tracking-[0.3em] font-mono">
+                Sync_Status: Optimized
               </span>
               <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
-                Ledger_Sync // Latency_4ms
+                Ledger_Synchronization // Sub-4ms
               </span>
             </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Decorative vertical lines */}
-      <div className="absolute top-0 bottom-0 left-[5%] w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-      <div className="absolute top-0 bottom-0 right-[5%] w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
     </section>
   );
 }

@@ -80,7 +80,7 @@ export default function Stepper({
 
   return (
     <div className="outer-container" {...rest}>
-      <div className={`step-circle-container ${stepCircleContainerClassName}`} style={{ border: '1px solid #e5e7eb', backgroundColor: 'white' }}>
+      <div className={`step-circle-container ${stepCircleContainerClassName}`}>
         <div className={`step-indicator-row ${stepContainerClassName}`}>
           {stepsArray.map((_, index) => {
             const stepNumber = index + 1;
@@ -164,8 +164,7 @@ function StepContentWrapper({ isCompleted, currentStep, direction, children, cla
 
   return (
     <motion.div
-      className={className}
-      style={{ position: 'relative', overflow: 'hidden' }}
+      className={`${className} relative overflow-hidden`}
       animate={{ height: isCompleted ? 0 : parentHeight }}
       transition={{ type: 'spring', duration: 0.4 }}
     >
@@ -204,7 +203,7 @@ function SlideTransition({ children, direction, onHeightReady }: SlideTransition
       animate="center"
       exit="exit"
       transition={{ duration: 0.4 }}
-      style={{ position: 'absolute', left: 0, right: 0, top: 0 }}
+      className="absolute inset-0"
     >
       {children}
     </motion.div>

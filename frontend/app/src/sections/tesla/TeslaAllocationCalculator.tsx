@@ -1,10 +1,25 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportOptions } from '@/lib/animations';
+import './TeslaAllocationCalculator.css';
 
 const TeslaAllocationCalculator = () => {
     const [cybercab, setCybercab] = useState(25);
     const [optimus, setOptimus] = useState(15);
+    const cyberRef = useRef<HTMLInputElement>(null);
+    const optimusRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (cyberRef.current) {
+            cyberRef.current.style.setProperty('--range-progress', `${cybercab}%`);
+        }
+    }, [cybercab]);
+
+    useEffect(() => {
+        if (optimusRef.current) {
+            optimusRef.current.style.setProperty('--range-progress', `${optimus}%`);
+        }
+    }, [optimus]);
 
     // Calculation: Cybercab contributes up to $15T, Optimus up to $85T
     const yieldValue = useMemo(() => {
@@ -51,14 +66,14 @@ const TeslaAllocationCalculator = () => {
                                 </div>
                                 <div className="relative pt-2">
                                     <input 
+                                        ref={cyberRef}
                                         id="cybercab-slider"
                                         type="range" 
                                         min="0" 
                                         max="100" 
                                         value={cybercab} 
                                         onChange={(e) => setCybercab(parseInt(e.target.value))}
-                                        className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00fbfb] hover:accent-[#00fbfb]/80 transition-all bg-[linear-gradient(to_right,#00fbfb_var(--range-progress),rgba(255,255,255,0.1)_var(--range-progress))]"
-                                        style={{ "--range-progress": `${cybercab}%` } as React.CSSProperties}
+                                        className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-[#00fbfb] hover:accent-[#00fbfb]/80 transition-all tesla-range-slider"
                                         title="Cybercab Deployment Percentage"
                                     />
                                     <div className="flex justify-between text-[10px] text-white/20 uppercase tracking-[0.2em] font-bold mt-4">
@@ -83,14 +98,14 @@ const TeslaAllocationCalculator = () => {
                                 </div>
                                 <div className="relative pt-2">
                                     <input 
+                                        ref={optimusRef}
                                         id="optimus-slider"
                                         type="range" 
                                         min="0" 
                                         max="100" 
                                         value={optimus} 
                                         onChange={(e) => setOptimus(parseInt(e.target.value))}
-                                        className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00fbfb] hover:accent-[#00fbfb]/80 transition-all bg-[linear-gradient(to_right,#00fbfb_var(--range-progress),rgba(255,255,255,0.1)_var(--range-progress))]"
-                                        style={{ "--range-progress": `${optimus}%` } as React.CSSProperties}
+                                        className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-[#00fbfb] hover:accent-[#00fbfb]/80 transition-all tesla-range-slider"
                                         title="Optimus Adoption Percentage"
                                     />
                                     <div className="flex justify-between text-[10px] text-white/20 uppercase tracking-[0.2em] font-bold mt-4">

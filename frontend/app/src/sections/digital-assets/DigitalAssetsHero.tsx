@@ -1,86 +1,104 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { fadeInUp, heroContainer } from '@/lib/animations';
 import LiquidityVisualizer from './LiquidityVisualizer';
+import './DigitalAssetsHero.css';
 
-/**
- * Digital Assets Hero - "Machine-Speed Arbitrage & MEV Dominance."
- * Features vibrant Solana-green and purple accents in a high-fidelity dashboard aesthetic.
- */
 export default function DigitalAssetsHero() {
   const { scrollY } = useScroll();
-  const backgroundY = useTransform(scrollY, [0, 1000], ['0%', '20%']);
+  
+  // Parallax transforms for high-fidelity immersion
+  const backgroundY = useTransform(scrollY, [0, 1000], ['0%', '15%']);
+  const contentY = useTransform(scrollY, [0, 1000], [0, 80]);
+  const networkOpacity = useTransform(scrollY, [0, 500], [0.8, 0.2]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0c]">
-      {/* Dynamic Background Flare */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050508]">
+      {/* Background Matrix/Network Grid */}
       <motion.div 
-        style={{ y: backgroundY }}
-        className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-40"
+        style={{ y: backgroundY, opacity: networkOpacity }}
+        className="absolute inset-0 z-0 select-none pointer-events-none digital-assets-grid"
       >
-        <div className="w-[800px] h-[800px] bg-gradient-to-br from-[#14f195]/10 via-[#8b5cf6]/5 to-transparent blur-[160px] rounded-full" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050508] via-transparent to-[#050508]" />
       </motion.div>
 
+      {/* Atmospheric terminal scanlines */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none terminal-scanline" />
+
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <motion.div
             variants={heroContainer}
             initial="hidden"
             animate="visible"
+            style={{ y: contentY }}
             className="flex flex-col items-start"
           >
             {/* Network Label */}
             <motion.div
               variants={fadeInUp}
-              className="mb-8 px-4 py-1.5 rounded-full border border-[#14f195]/20 bg-[#14f195]/5 backdrop-blur-md flex items-center gap-2"
+              className="mb-10 px-6 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl inline-flex items-center gap-3 group"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-[#14f195] animate-pulse" />
-              <span className="text-[10px] sm:text-[12px] font-bold tracking-[0.3em] uppercase text-[#14f195]/80">
-                Luminator Digital Asset Layer
+              <div className="relative">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#14f195] animate-ping absolute inset-0" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#14f195] relative z-10" />
+              </div>
+              <span className="text-[10px] sm:text-[11px] font-black tracking-[0.4em] uppercase text-white/50 group-hover:text-white transition-colors duration-500">
+                Institutional Asset Layer
               </span>
             </motion.div>
 
             {/* Primary Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="text-[48px] sm:text-[68px] md:text-[84px] font-black tracking-[-0.05em] uppercase leading-[0.95] mb-8 bg-gradient-to-br from-white via-white to-white/30 bg-clip-text text-transparent"
+              className="text-[48px] sm:text-[72px] md:text-[100px] font-black tracking-[-0.05em] uppercase leading-[0.85] mb-10"
             >
-              Machine-Speed <br />
+              <span className="text-white">Machine-Speed</span> <br />
               <span className="bg-gradient-to-r from-[#14f195] via-[#8b5cf6] to-[#14f195] bg-clip-text text-transparent">MEV Dominance.</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
-              className="max-w-[560px] text-[16px] sm:text-[18px] text-gray-400 font-light leading-relaxed mb-12"
+              className="max-w-[560px] text-[17px] sm:text-[20px] text-zinc-400 font-light leading-relaxed mb-16 tracking-tight"
             >
-              Capitalize on fragmented liquidity and high-frequency arbitrage opportunities using proprietary Jito bundles and Rust atomic execution.
+              Capitalize on fragmented liquidity and high-frequency arbitrage opportunities using proprietary Jito-optimized bundles and Rust-based atomic execution.
             </motion.p>
 
-            {/* CTA Button */}
-            <motion.div variants={fadeInUp}>
+            {/* CTA Button Suite */}
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-6">
               <a
                 href="#ecosystem"
-                className="px-10 py-5 bg-[#14f195] text-[#0a0a0c] font-bold uppercase tracking-[0.1em] text-[14px] hover:bg-white transition-all shadow-[0_0_40px_rgba(20,241,149,0.3)] hover:-translate-y-1 active:scale-[0.98]"
+                className="relative group px-12 py-6 overflow-hidden bg-[#14f195] transition-all hover:bg-white"
               >
-                Access MEV Alphas
+                <span className="relative z-10 text-[#050508] font-black uppercase tracking-[0.2em] text-[13px]">
+                  Access MEV Alphas
+                </span>
+              </a>
+              <a
+                href="#docs"
+                className="px-12 py-6 border border-white/10 bg-white/5 backdrop-blur-md rounded-sm hover:border-[#14f195]/50 transition-all"
+              >
+                <span className="text-white/40 font-bold uppercase tracking-[0.15em] text-[13px] hover:text-[#14f195] transition-colors">
+                  API Documentation
+                </span>
               </a>
             </motion.div>
           </motion.div>
 
           {/* Integrated Visualizer */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.5, delay: 0.4 }}
             className="hidden lg:block relative"
           >
-            <div className="absolute -inset-4 bg-gradient-to-br from-[#14f195]/20 to-[#8b5cf6]/20 blur-[60px] opacity-20" />
+            <div className="absolute -inset-10 bg-gradient-to-br from-[#14f195]/20 to-[#8b5cf6]/20 blur-[100px] opacity-10 pointer-events-none" />
             <LiquidityVisualizer />
             
             {/* Institutional metadata deco */}
-            <div className="absolute -bottom-10 -right-4 flex flex-col items-end opacity-40">
-              <span className="text-[10px] font-mono text-[#14f195] uppercase tracking-widest">
-                Node_Synchronization: Stable
+            <div className="absolute -bottom-12 -right-6 flex flex-col items-end opacity-20 group">
+              <span className="text-[10px] font-black text-[#14f195] uppercase tracking-[0.3em] font-mono">
+                Telemetry: Optimizing
               </span>
               <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
                 Epoch_492 // Slot_291034
