@@ -1,182 +1,200 @@
 import { useState } from 'react';
-import { Home, LineChart, Wallet, LogOut, Menu, X, ArrowLeftRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  LayoutDashboard, 
+  BarChart3, 
+  Wallet, 
+  Activity, 
+  Settings, 
+  User, 
+  LogOut, 
+  Menu, 
+  X, 
+  Bell,
+  Search,
+  PieChart
+} from 'lucide-react';
+import { Link, useLocation, Outlet } from 'react-router-dom';
 
-// Mock components for different views
-import { Overview } from '../pages/dashboard/Overview';
-import { TradingTerminal } from '../pages/dashboard/TradingTerminal';
-import { WalletView } from '../pages/dashboard/Wallet';
-
-type ViewType = 'overview' | 'trading' | 'wallet';
-
-export function DashboardLayout() {
-  const [activeView, setActiveView] = useState<ViewType>(() => {
-    const hash = window.location.hash.toLowerCase();
-    if (hash === '#dashboard-trading') return 'trading';
-    if (hash === '#dashboard-wallet') return 'wallet';
-    return 'overview';
-  });
+export default function DashboardLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-
-
-  const handleLogout = () => {
-    window.location.hash = ''; // Go back to landing page
-  };
+  const location = useLocation();
 
   const navItems = [
-    { id: 'overview', label: 'Overview', icon: Home, view: 'overview' as ViewType },
-    { id: 'trading', label: 'Trading', icon: LineChart, view: 'trading' as ViewType },
-    { id: 'wallet', label: 'Wallet', icon: Wallet, view: 'wallet' as ViewType },
+    { icon: LayoutDashboard, label: 'Overview', path: '/dashboard' },
+    { icon: BarChart3, label: 'Performance', path: '/dashboard/performance' },
+    { icon: PieChart, label: 'Allocations', path: '/dashboard/allocations' },
+    { icon: Wallet, label: 'Portfolio', path: '/dashboard/portfolio' },
+    { icon: Activity, label: 'Activity', path: '/dashboard/activity' },
+    { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
   ];
 
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden font-sans">
-      
+    <div className="min-h-screen bg-[#09090b] text-white flex overflow-hidden">
       {/* Sidebar - Desktop */}
-      <aside className="hidden md:flex w-64 flex-col bg-white border-r border-gray-200">
-        <div className="h-16 flex items-center px-6 border-gray-200">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8  bg-brand-purple flex items-center justify-center">
-              <span className="text-white font-bold text-lg">S</span>
+      <aside className="hidden lg:flex flex-col w-[280px] bg-[#131318] border-r border-white/5 h-screen sticky top-0">
+        <div className="p-8">
+          <div className="flex items-center gap-3 mb-12">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#00fbfb] to-[#6305ef] rounded-xl flex items-center justify-center shadow-lg shadow-[#00fbfb]/20">
+              <span className="text-[20px] font-black text-[#131318]">L</span>
             </div>
-            <span className="font-bold text-gray-900 tracking-tight uppercase">SML Broker</span>
+            <span className="text-[20px] font-bold tracking-tight">Luminator<span className="text-[#00fbfb]">.</span></span>
           </div>
+
+          <nav className="space-y-2">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path || (item.path === '/dashboard' && location.pathname === '/tesla-dashboard');
+              return (
+                <Link 
+                  key={item.label} 
+                  to={item.path}
+                  className={`flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-300 group ${
+                    isActive 
+                    ? 'bg-[#00fbfb]/10 text-[#00fbfb] border border-[#00fbfb]/20 shadow-lg shadow-[#00fbfb]/5' 
+                    : 'text-white/40 hover:text-white hover:bg-white/5 border border-transparent'
+                  }`}
+                >
+                  <item.icon size={20} className={`${isActive ? 'text-[#00fbfb]' : 'text-white/40 group-hover:text-white'} transition-colors`} />
+                  <span className="text-[14px] font-bold tracking-tight">{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
         </div>
 
-        <nav className="flex-1 px-4 py-6 space-y-2">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeView === item.view;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setActiveView(item.view)}
-                className={`w-full flex items-center gap-3 px-4 py-3  transition-all font-medium ${
-                  isActive 
-                    ? 'bg-brand-purple text-white shadow-md shadow-brand-purple/20' 
-                    : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900'
-                }`}
-              >
-                <Icon className="w-5 h-5" />
-                {item.label}
-              </button>
-            )
-          })}
-        </nav>
-
-        <div className="p-4 border-gray-200">
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-3  transition-all text-red-500 hover:bg-red-50 font-medium"
+        <div className="mt-auto p-8 border-t border-white/5 flex flex-col gap-4">
+          <div className="flex items-center gap-4 px-4 py-3 rounded-xl bg-white/5 border border-white/10">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-rose-500/20 to-amber-500/20 border border-white/10 flex items-center justify-center">
+              <User size={18} className="text-white/60" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[13px] font-bold leading-none mb-1">Institutional User</span>
+              <span className="text-[10px] text-white/40 font-mono">tier: high-net-worth</span>
+            </div>
+          </div>
+          <button 
+            title="Terminate Session"
+            className="flex items-center gap-4 px-4 py-3 rounded-xl text-white/40 hover:text-rose-500 hover:bg-rose-500/10 transition-all duration-300"
           >
-            <LogOut className="w-5 h-5" />
-            Sign Out
+            <LogOut size={18} />
+            <span className="text-[13px] font-bold">Terminate Session</span>
           </button>
         </div>
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        
-        {/* Topbar */}
-        <header className="h-16 flex items-center justify-between px-4 sm:px-6 md:px-8 bg-white shadow-sm z-10">
-          <div className="flex items-center">
-            {/* Mobile menu button */}
+      <main className="flex-1 flex flex-col min-h-screen overflow-y-auto bg-gradient-to-b from-[#131318] to-[#09090b]">
+        {/* Top Header */}
+        <header className="h-20 bg-[#131318]/50 backdrop-blur-xl border-b border-white/5 px-8 flex items-center justify-between sticky top-0 z-40">
+          <div className="flex items-center gap-8 flex-1">
             <button 
-              className="md:hidden p-2 -ml-2 mr-2 text-gray-500 hover:bg-gray-100 "
-              aria-label="Toggle mobile menu"
+              title="Open Mobile Menu"
+              className="lg:hidden w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-white/60 hover:text-white transition-colors"
               onClick={() => setIsMobileMenuOpen(true)}
             >
-              <Menu className="w-6 h-6" />
+              <Menu size={20} />
             </button>
-            <h1 className="text-xl font-bold text-gray-900 capitalize tracking-wide">{activeView}</h1>
+            
+            <div className="hidden md:flex items-center gap-3 px-4 py-2.5 bg-[#09090b] rounded-xl border border-white/10 w-full max-w-[400px] focus-within:border-[#00fbfb]/50 transition-all">
+              <Search size={18} className="text-white/20" />
+              <input 
+                type="text" 
+                placeholder="Search assets, sectors, or reports..." 
+                className="bg-transparent border-none outline-none text-[13px] text-white/80 placeholder:text-white/20 w-full"
+              />
+              <span className="px-2 py-0.5 bg-white/5 border border-white/10 rounded text-[9px] font-black text-white/30 tracking-[0.1em] uppercase">⌘K</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setActiveView('wallet')}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700  font-semibold transition-colors text-sm"
-            >
-              <ArrowLeftRight className="w-4 h-4" />
-              Deposit
-            </button>
-            <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
-              <div className="text-right hidden sm:block">
-                <p className="text-sm font-semibold text-gray-900 leading-tight">John Doe</p>
-                <p className="text-xs text-gray-500 lowercase">Verified Account</p>
-              </div>
-              <div className="w-10 h-10  bg-brand-blue text-white flex items-center justify-center font-bold shadow-sm">
-                JD
-              </div>
+            <div className="hidden sm:flex flex-col items-end mr-4">
+              <span className="text-[13px] font-bold text-[#00fbfb]">$242,098.42</span>
+              <span className="text-[10px] text-white/30 font-black uppercase tracking-widest">+12.4% Capital Yield</span>
             </div>
+            <button 
+              title="Notifications"
+              className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center relative transition-all group"
+            >
+              <Bell size={18} className="text-white/40 group-hover:text-[#00fbfb] transition-colors" />
+              <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 rounded-full bg-[#00fbfb] shadow-[0_0_10px_rgba(0,251,251,0.5)]" />
+            </button>
           </div>
         </header>
 
-        {/* Scrollable Content View */}
-        <main className="flex-1 overflow-auto bg-gray-50/50 relative">
-          <div className="p-4 sm:p-6 md:p-8 max-w-[1600px] mx-auto h-full">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeView}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="h-full"
-              >
-                {activeView === 'overview' && <Overview />}
-                {activeView === 'trading' && <TradingTerminal />}
-                {activeView === 'wallet' && <WalletView />}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </main>
-      </div>
-
-      {/* Mobile Sidebar Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div 
-            className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm" 
-            onClick={() => setIsMobileMenuOpen(false)}
-          ></div>
-          <motion.div 
-            initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            className="fixed inset-y-0 left-0 w-64 bg-white shadow-xl flex flex-col"
-          >
-            <div className="h-16 flex items-center justify-between px-6 border-gray-200">
-              <span className="font-bold text-gray-900 tracking-tight uppercase">SML Broker</span>
-              <button onClick={() => setIsMobileMenuOpen(false)} aria-label="Close menu" className="p-2 text-gray-500">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <nav className="flex-1 px-4 py-6 space-y-2">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeView === item.view;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      setActiveView(item.view);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className={`w-full flex items-center gap-3 px-4 py-3  transition-all font-medium ${
-                      isActive ? 'bg-brand-purple text-white' : 'text-gray-500'
-                    }`}
-                  >
-                    <Icon className="w-5 h-5" />
-                    {item.label}
-                  </button>
-                )
-              })}
-            </nav>
-          </motion.div>
+        {/* Content Body */}
+        <div className="p-8 lg:p-12 relative">
+          <Outlet />
         </div>
-      )}
+      </main>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[50] lg:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <motion.div 
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 bottom-0 w-[300px] bg-[#131318] z-[60] lg:hidden p-8 flex flex-col border-r border-white/10"
+            >
+              <div className="flex items-center justify-between mb-12">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-[#00fbfb] rounded-lg flex items-center justify-center">
+                    <span className="text-[16px] font-black text-[#131318]">L</span>
+                  </div>
+                  <span className="text-[18px] font-bold tracking-tight">Luminator</span>
+                </div>
+                <button 
+                  title="Close Mobile Menu"
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="text-white/40 hover:text-white transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <nav className="space-y-3">
+                {navItems.map((item) => {
+                   const isActive = location.pathname === item.path;
+                   return (
+                    <Link 
+                      key={item.label} 
+                      to={item.path}
+                      className={`flex items-center gap-4 px-4 py-4 rounded-xl transition-all duration-300 ${
+                        isActive 
+                        ? 'bg-[#00fbfb]/10 text-[#00fbfb] border border-[#00fbfb]/20 shadow-lg' 
+                        : 'text-white/40 hover:bg-white/5 border border-transparent'
+                      }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <item.icon size={20} />
+                      <span className="text-[15px] font-bold tracking-tight">{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              <div className="mt-auto pt-8 border-t border-white/5">
+                <button 
+                  title="Terminate Session"
+                  className="flex items-center gap-4 w-full px-4 py-4 rounded-xl text-rose-500 bg-rose-500/5 transition-all duration-300 font-bold text-[14px]"
+                >
+                  <LogOut size={20} />
+                  Terminate Session
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import TeslaProductPillars from '../../sections/tesla/TeslaProductPillars';
 import TeslaStats from '../../sections/tesla/TeslaStats';
 import TeslaEcosystem from '../../sections/tesla/TeslaEcosystem';
 import TeslaQuotes from '../../sections/tesla/TeslaQuotes';
+import TeslaAllocationCalculator from '../../sections/tesla/TeslaAllocationCalculator';
 import { Link } from 'react-router-dom';
 
 export default function TeslaLandingPage() {
@@ -45,6 +46,9 @@ export default function TeslaLandingPage() {
         <div className="py-24 bg-[#1b1b20] border-t border-white/5">
            <TeslaQuotes />
         </div>
+
+        {/* Dynamic Allocation Calculator */}
+        <TeslaAllocationCalculator />
 
         {/* Final CTA Section */}
         <section className="py-32 bg-[#131318] relative overflow-hidden border-t border-white/5">

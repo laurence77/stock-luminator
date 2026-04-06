@@ -1,44 +1,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { fadeInUp, viewportOptions } from '../../lib/animations';
+import { pillars } from '@/data/tesla-content';
+import type { TeslaPillar } from '@/data/tesla-content';
 
-const pillars = [
-  {
-    title: "Intelligent Mobility",
-    subtitle: "The AI Autonomy Wave",
-    description: "Cybercab represents the first-mover advantage in the multi-trillion dollar autonomous transport logistics network.",
-    image: "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Cybercab-Hero-Desktop-Global.jpg",
-    cta: "View Autonomy Whitepaper",
-    stats: [
-      { label: "Level 5", value: "Autonomy" },
-      { label: "$10T+", value: "Addressable Market" }
-    ]
-  },
-  {
-    title: "General Purpose Robotics",
-    subtitle: "Labor Economy Transformation",
-    description: "Optimus Gen 2 is designed to scale beyond automotive, addressing the global labor shortage through general-purpose bipedal AI.",
-    image: "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Optimus-Hero-Desktop-Global.jpg",
-    cta: "Explore Robotic Synergy",
-    stats: [
-      { label: "10B+", value: "Global Workforce" },
-      { label: "2030", value: "Mass Deployment" }
-    ]
-  },
-  {
-    title: "Electrified Performance",
-    subtitle: "Beyond Peak Performance",
-    description: "Model S Plaid is the foundation of high-performance electric propulsion, delivering institutional-grade velocity and range.",
-    image: "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Model-S-Main-Hero-Desktop-Global.jpg",
-    cta: "View Performance Metrics",
-    stats: [
-      { label: "1.99s", value: "0-60 MPH" },
-      { label: "1,020", value: "Peak Horsepower" }
-    ]
-  }
-];
-
-function PillarSection({ pillar }: { pillar: typeof pillars[0] }) {
+function PillarSection({ pillar }: { pillar: TeslaPillar }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,

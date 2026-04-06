@@ -7,7 +7,7 @@ import { CustomCursor } from '@/components/ui/CustomCursor';
 // Layouts
 import { MainLayout } from '@/layouts/MainLayout';
 import { ServiceLayout } from '@/layouts/ServiceLayout';
-import { DashboardLayout } from '@/layouts/DashboardLayout';
+import DashboardLayout from '@/layouts/DashboardLayout';
 
 // Pages (lazy loaded for code splitting)
 const Home = lazy(() => import('@/pages/Home'));
@@ -22,6 +22,7 @@ const DigitalAssetsLandingPage = lazy(() => import('@/pages/digital-assets/Digit
 const MirrorTradingLandingPage = lazy(() => import('@/pages/mirror-trading/MirrorTradingLandingPage'));
 const RealEstateLandingPage = lazy(() => import('@/pages/real-estate/RealEstateLandingPage'));
 const OurTeam = lazy(() => import('@/pages/team/OurTeam'));
+const TeslaDashboard = lazy(() => import('@/pages/dashboard/TeslaDashboard'));
 
 // AnimatePresence requires location from inside BrowserRouter
 function AnimatedRoutes() {
@@ -53,7 +54,12 @@ function AnimatedRoutes() {
         </Route>
 
         {/* Dashboard Layout */}
-        <Route path="/dashboard/*" element={<DashboardLayout />} />
+        <Route path="/dashboard" element={<DashboardLayout children={<TeslaDashboard />} />} />
+        <Route path="/dashboard/*" element={<DashboardLayout />}>
+           <Route index element={<TeslaDashboard />} />
+           <Route path="tesla-dashboard" element={<TeslaDashboard />} />
+           {/* Add future dashboard sub-routes here */}
+        </Route>
       </Routes>
     </AnimatePresence>
   );

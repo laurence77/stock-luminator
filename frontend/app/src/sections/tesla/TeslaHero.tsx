@@ -82,7 +82,7 @@ export default function TeslaHero() {
       {/* Scroll indicator with SVG logo */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-4 opacity-50">
         <FloatingElement duration={4}>
-          <TeslaLogo className="h-4 w-auto mb-4 fill-current text-white hover:text-[#00fbfb] transition-colors duration-300 cursor-pointer" />
+          <TeslaLogo className="h-4 w-auto mb-4 fill-white hover:fill-[#00fbfb] transition-colors duration-300 cursor-pointer lg:scale-125" />
         </FloatingElement>
         <div className="w-px h-12 bg-gradient-to-b from-transparent via-[#00fbfb] to-transparent" />
         <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase font-bold">Explore Future</span>
