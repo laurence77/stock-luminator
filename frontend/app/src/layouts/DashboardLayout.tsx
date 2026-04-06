@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 
-export default function DashboardLayout() {
+export function DashboardLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 

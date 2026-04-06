@@ -7,7 +7,7 @@ import { CustomCursor } from '@/components/ui/CustomCursor';
 // Layouts
 import { MainLayout } from '@/layouts/MainLayout';
 import { ServiceLayout } from '@/layouts/ServiceLayout';
-import DashboardLayout from '@/layouts/DashboardLayout';
+import { DashboardLayout } from '@/layouts/DashboardLayout';
 
 // Pages (lazy loaded for code splitting)
 const Home = lazy(() => import('@/pages/Home'));
